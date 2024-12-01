@@ -40,22 +40,9 @@ void no() { cout<<"NO\n"; }
 
 
 int main(){
-    int n,m;
-    cin>>n>>m;
+    int t;
+    cin>>t;
+    while(t--){
 
-    vi arr(n);
-    inv;
-
-    for(int i=0; i<n; ++i){
-        arr[i]= ceil(arr[i]/double(m));
     }
-
-    int sol=1;
-    for(int i=0; i<n; ++i){
-        if(arr[i]>=arr[sol-1]){
-            sol=i+1;
-        }
-    }
-
-    cout<<sol<<endl;
 }

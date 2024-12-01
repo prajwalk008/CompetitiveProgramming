@@ -40,22 +40,43 @@ void no() { cout<<"NO\n"; }
 
 
 int main(){
-    int n,m;
-    cin>>n>>m;
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
 
-    vi arr(n);
-    inv;
+        vll arr(n);
+        inv;
 
-    for(int i=0; i<n; ++i){
-        arr[i]= ceil(arr[i]/double(m));
-    }
+        map<int,int> freq;
+        int unique_Ent=0;
+        int maxFreq=-1;
+        
+        for(int i=0; i<n; ++i){
+            if(freq[arr[i]]==0){
+                unique_Ent++;
+            }
+            freq[arr[i]]++;
 
-    int sol=1;
-    for(int i=0; i<n; ++i){
-        if(arr[i]>=arr[sol-1]){
-            sol=i+1;
+            if(freq[arr[i]]>maxFreq){
+                maxFreq=freq[arr[i]];
+            }
         }
-    }
 
-    cout<<sol<<endl;
+        int x;
+        if(maxFreq>unique_Ent){
+            x= unique_Ent;
+        }
+        else if(unique_Ent>maxFreq){
+            x= maxFreq;
+        }
+        else{
+            x= maxFreq-1;
+        }
+        
+        cout<<x<<endl;
+
+
+    }
 }

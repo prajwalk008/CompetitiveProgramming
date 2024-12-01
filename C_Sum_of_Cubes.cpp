@@ -40,22 +40,28 @@ void no() { cout<<"NO\n"; }
 
 
 int main(){
-    int n,m;
-    cin>>n>>m;
-
-    vi arr(n);
-    inv;
-
-    for(int i=0; i<n; ++i){
-        arr[i]= ceil(arr[i]/double(m));
+    int t;
+    cin>>t;
+    map<ll,ll> cubes;
+    for(ll i=1; i<=10000; ++i){
+        cubes[i*i*i]= 1;
     }
+    while(t--){
+        ll x;
+        cin>>x;
 
-    int sol=1;
-    for(int i=0; i<n; ++i){
-        if(arr[i]>=arr[sol-1]){
-            sol=i+1;
+        bool flag= true;
+        for(ll j=1; j<=10000; j++){
+            if(cubes[x-j*j*j]){
+                cout<<"YES"<<endl;
+                flag= false;
+                break;
+            }
         }
-    }
+        if(flag){
+            cout<<"NO"<<endl;
+        }
+        
 
-    cout<<sol<<endl;
+    }
 }
