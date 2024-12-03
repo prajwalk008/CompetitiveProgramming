@@ -40,23 +40,9 @@ void no() { cout<<"NO\n"; }
 
 
 int main(){
-    int n,m;
-    cin>>n>>m;
+    int t;
+    cin>>t;
+    while(t--){
 
-    vector<pair<int,int>> arr;
-    map<int,int> minSong;
-    int i=0; 
-    while(i<n){
-        int a,b;
-        cin>>a>>b;
-        pair<int,int> p= make_pair(a,b);
-        
-        i++;
-    }
-
-    while(m--){
-        int x;
-        cin>>x;
-        for()
     }
 }
