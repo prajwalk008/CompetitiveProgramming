@@ -43,38 +43,27 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        ll w,b;
-        cin>>w>>b;
+        ll x,m;
+        cin>>x>>m;
+        ll y= 2*x-1;
 
-
-        ll s=0;
-        ll e= max(w,b);
-        ll mid= s+(e-s)/2;
-
-        ll sol=0;
-        bool flag= false;
-
-        while(s<=e){
-            if((mid*(mid+1))/2==(w+b)){
-                cout<<mid<<endl;
-                flag= true;
-                break;
-            }
-            else if((mid*(mid+1))/2<(w+b)){
-                sol= mid;
-                s=mid+1;
-            }
-            else{
-                e=mid-1;
-            }
-
-            mid= s+(e-s)/2;
+        ll z;
+        if(y<m){
+            z=y;
         }
-
-        if(!flag){
-            cout<<sol<<endl;
+        else{
+            z=m;
         }
+        ll ct=0;
 
+        for(ll i=1; i<=z; ++i){
+            ll t= x^i;
 
+            if(t!=0 && (x%t==0 || i%t==0)){
+                ct++;
+            }
+        }   
+
+        cout<<ct<<endl;
     }
-}   
+}
