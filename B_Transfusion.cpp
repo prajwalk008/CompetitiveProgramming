@@ -45,27 +45,46 @@ int main(){
     while(t--){
         int n;
         cin>>n;
-        
-        if(n<5){
-            cout<<-1<<endl;
+
+        int sum=0;
+        int os=0;
+        int es=0;
+
+        vll arr(n);
+        for(int i=0; i<n; ++i){
+            cin>>arr[i];
+            sum+=arr[i];
+            if(i%2==0){
+                es+=arr[i];
+            }
+            else{
+                os+=arr[i];
+            }
         }
 
+        int on;
+        int en;
+        if(n%2==0){
+            on=n/2;
+            en=n/2;
+        }
         else{
-            for(int i=1; i<=n; i+=2){
-                if(i!=5){
-                    cout<<i<<" ";
-                }
-                
+            en=(n/2)+1;
+            on=n/2;
+        }
+        //cout<<es<<endl;
+        int avg= sum/n;
+        //cout<<avg<<endl;
+        if(sum%n != 0){
+            cout<<"NO"<<endl;
+        }
+        else{
+            if(os/on !=avg || es/en!=avg){
+                cout<<"NO"<<endl;
             }
-
-            cout<<5<<" ";
-            cout<<4<<" ";
-
-            for(int i=2; i<=n; i+=2){
-                if(i!=4){
-                    cout<<i<<" ";
-                }
+            else{
+                cout<<"YES"<<endl;
             }
         }
     }
-}
+}   

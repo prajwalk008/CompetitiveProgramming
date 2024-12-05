@@ -43,29 +43,9 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        int n;
-        cin>>n;
+        string s;
+        cin>>s;
+
         
-        if(n<5){
-            cout<<-1<<endl;
-        }
-
-        else{
-            for(int i=1; i<=n; i+=2){
-                if(i!=5){
-                    cout<<i<<" ";
-                }
-                
-            }
-
-            cout<<5<<" ";
-            cout<<4<<" ";
-
-            for(int i=2; i<=n; i+=2){
-                if(i!=4){
-                    cout<<i<<" ";
-                }
-            }
-        }
     }
 }

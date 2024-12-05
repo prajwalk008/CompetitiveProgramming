@@ -43,29 +43,35 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        int n;
-        cin>>n;
-        
-        if(n<5){
-            cout<<-1<<endl;
+        int n,m;
+        cin>>n>>m;
+        vector<string> s;
+        while(n--){
+            string st;
+            cin>>st;
+            s.push_back(st);
+
         }
 
-        else{
-            for(int i=1; i<=n; i+=2){
-                if(i!=5){
-                    cout<<i<<" ";
-                }
-                
+        int ct=0;
+        int j=0;
+        while(m>0 && j<s.size()){
+            string x= s[j];
+            int xl= x.length();
+
+            if(m-xl>=0){
+                m-=xl;
+                ct++;
+                j++;
             }
 
-            cout<<5<<" ";
-            cout<<4<<" ";
-
-            for(int i=2; i<=n; i+=2){
-                if(i!=4){
-                    cout<<i<<" ";
-                }
+            else{
+                break;
             }
+
+
         }
+
+        cout<<ct<<endl;
     }
 }

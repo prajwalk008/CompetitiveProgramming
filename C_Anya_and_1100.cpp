@@ -43,29 +43,68 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        int n;
-        cin>>n;
-        
-        if(n<5){
-            cout<<-1<<endl;
+        string s;
+        cin>>s;
+        int q;
+        cin>>q;
+
+        if(s.length()<4){
+            while(q--){
+                int a,b;
+                cin>>a>>b;
+                cout<<"NO"<<endl;
+            }
         }
 
         else{
-            for(int i=1; i<=n; i+=2){
-                if(i!=5){
-                    cout<<i<<" ";
+            int req=0;
+            for(int i=0; i<s.length()-3; ++i){
+                string subs= s.substr(i,4);
+
+                if(subs=="1100"){
+                    req++;
                 }
-                
             }
 
-            cout<<5<<" ";
-            cout<<4<<" ";
+            while(q--){
+                int a,b;
+                cin>>a>>b;
 
-            for(int i=2; i<=n; i+=2){
-                if(i!=4){
-                    cout<<i<<" ";
+                if(s[a-1]==b+'0'){
+                    if(req>0){
+                        cout<<"YES"<<endl;
+                    }
+                    else{
+                        cout<<"NO"<<endl;
+                    }
                 }
+                else{
+                    if(b==0){
+                        string sub1= s.substr(a-1,4);
+
+                        if(sub1=="1100"){
+                            req--;
+                        }
+
+                        if(a>1){
+                            string sub2= s.substr(a-2,4);
+                            if(sub2=="1100"){
+                                req--;
+                            }
+
+                        }
+
+                        
+                        
+                            
+                        
+                    }
+                }
+
             }
         }
+
+        
+
     }
 }
