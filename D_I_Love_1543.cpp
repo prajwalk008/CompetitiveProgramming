@@ -43,66 +43,37 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        ll n,m,l;
-        cin>>n>>m>>l;
+        int n,m;
+        cin>>n>>m;
 
-        vector<ll> hurdPos;
-        map<ll,ll> hurdleMap;
+        vector<string> arr;
+
         for(int i=0; i<n; ++i){
-            ll a,b;
-            cin>>a>>b;
-            hurdPos.push_back(a-1);
-            hurdleMap[a-1]= b-a+1;
+            string s;
+            cin>>s;
+            arr.push_back(s);
         }
 
-        vll powerPos;
-        map<ll,priority_queue<ll>> powerMap;
-        for(int i=0; i<m; ++i){
-            ll a,b;
-            cin>>a>>b;
-            powerPos.push_back(a);
-            powerMap[a].push(b);
-        }
-        priority_queue<ll> pq; 
-        ll currPower=1;
-        int powerUsed=0;
-        int j=0;
-        bool isSolved=false;
-        for(int i=0; i<hurdPos.size(); ++i){
-            ll x= hurdPos[i];
-            while(j<powerPos.size() && powerPos[j]<=x){
-                int z1= powerPos[j];
-                while(!powerMap[z1].empty()){
-                    int y= powerMap[z1].top();
-                    powerMap[z1].pop();
-                    pq.push(y);
-                }
-                j++;
+        int lim= min(n,m);
+        int layers= lim/2;
+
+        vector<string> solVector;
+        for(int i=0; i<layers; ++i){
+            string s1=arr[i];
+            for(int j=i+1; j<n-i-1; ++j){
+                char t= arr[j][m-i-1];
+                s1+=t;
             }
-            if(hurdleMap[x]>currPower-1){
-                while(!pq.empty()){
-                    currPower+=pq.top();
-                    pq.pop();
-                    powerUsed++;
-                    if(currPower>hurdleMap[x]){
-                        break;
-                    }
-                }
-                if(pq.empty() && currPower<=hurdleMap[x]){
-                    cout<<-1<<endl;
-                    isSolved=true;
-                    break;
-                }
+            string s2= arr[n-i-1];
+            reverse(s2.begin(),s2.end());
+            s1+=s2;
+
+            for(int i=m-1; i>=0; i--){
                 
             }
             
-        }
-        if(!isSolved){
-            cout<<powerUsed<<endl;
-        }
-        
 
-        
+        }
 
 
     }
