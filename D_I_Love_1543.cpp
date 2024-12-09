@@ -59,21 +59,50 @@ int main(){
 
         vector<string> solVector;
         for(int i=0; i<layers; ++i){
-            string s1=arr[i];
+            string s1;
+
+            for(int k=i; k<=m-i-1; ++k){
+                char t= arr[i][k];
+                s1+=t;
+            }
             for(int j=i+1; j<n-i-1; ++j){
                 char t= arr[j][m-i-1];
                 s1+=t;
             }
-            string s2= arr[n-i-1];
-            reverse(s2.begin(),s2.end());
-            s1+=s2;
-
-            for(int i=m-1; i>=0; i--){
-                
+            for(int k=m-i-1; k>=i; k--){
+                char t= arr[n-i-1][k];
+                s1+=t;
             }
-            
 
+            for(int j=n-i-2; j>i; j--){
+                char t= arr[j][i];
+                s1+=t;
+            }
+
+            solVector.push_back(s1);
         }
+
+        for(auto &i:solVector){
+            string s= i.substr(0,3);
+            i+=s;
+            //cout<<i<<endl;
+        }
+
+
+        int ans=0;
+        for(int i=0; i<solVector.size(); ++i){
+            string s= solVector[i];
+            for(int j=0; j<s.length()-3; ++j){
+                if(s[j]=='1'){
+                    string s2= s.substr(j,4);
+                    if(s2=="1543"){
+                        ans++;
+                    }
+                }
+            }
+        }
+
+        cout<<ans<<endl;
 
 
     }
