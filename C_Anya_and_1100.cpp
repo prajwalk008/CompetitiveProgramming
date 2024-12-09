@@ -80,24 +80,82 @@ int main(){
                 }
                 else{
                     if(b==0){
-                        string sub1= s.substr(a-1,4);
+                        if(req>0){
+                            string sub1= s.substr(a-1,4);
 
-                        if(sub1=="1100"){
-                            req--;
-                        }
-
-                        if(a>1){
-                            string sub2= s.substr(a-2,4);
-                            if(sub2=="1100"){
-                                req--;
+                            if(sub1=="1100"){
+                                req--; 
                             }
+                            else{
+                                if(a>1){
+                                    string sub2= s.substr(a-2,4);
+                                    if(sub2=="1100"){
+                                        req--;
+                                    }
 
+                                }
+                            }
+                        }
+
+                        s[a-1]='0';
+
+                        if(a>2){
+                            string sub3= s.substr(a-3,4);
+                            if(sub3=="1100"){
+                                req++;
+                            }
+                            else{
+                                if(a>3){
+                                    string sub4= s.substr(a-4,4);
+                                    if(sub4=="1100"){
+                                        req++;
+                                    }
+                                }
+                            }
                         }
 
                         
+                    }
+                    else{
+                        if(req>0){
+                            if(a>2){
+                                string sub1= s.substr(a-3,4);
+                                if(sub1=="1100"){
+                                    req--;
+                                }
+                                else{
+                                    if(a>3){
+                                        string sub4= s.substr(a-4,4);
+                                        if(sub4=="1100"){
+                                            req--;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        s[a-1]='1';
+
+                        string sub1= s.substr(a-1,4);
+                        if(sub1=="1100"){
+                            req++;
+                        }
+                        else{
+                            if(a>1){
+                                string sub2= s.substr(a-2,4);
+                                if(sub2=="1100"){
+                                    req++;
+                                }
+                            }
+                        }
                         
-                            
-                        
+                    }
+
+                    if(req>0){
+                        cout<<"YES"<<endl;
+                    }
+                    else{
+                        cout<<"NO"<<endl;
                     }
                 }
 

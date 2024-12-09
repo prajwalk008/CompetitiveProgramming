@@ -38,8 +38,21 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+//fastIO
+#define FAST_IO ios::sync_with_stdio(false); cin.tie(nullptr);
 
+
+int useTimar(int k,int i, string&s){
+    while(k--){
+        s[i]='1';
+        i++;
+    }
+
+    return i;
+
+}
 int main(){
+    FAST_IO
     int t;
     cin>>t;
     while(t--){
@@ -48,31 +61,31 @@ int main(){
         string s;
         cin>>s;
 
-        string ref(m,'0');
-        string ref2(k,'1');
-
-        // for(int i=0; i<m; ++i){
-        //     ref+='0';
-        // }
-
-        // for(int i=0; i<k; ++i){
-        //     ref2+='1';
-        // }
-
         int ct=0;
 
-        
-
-
-        for(int i=0; i<s.length()-m+1; ++i){
-            string str= s.substr(i,m);
-            if(str==ref){
-                s.replace(i+m-1,k,ref2);
-                //cout<<s<<endl;
-                ct++;
-                i+=(m-2+k);
+        int i=0;
+        int mCnt=0;
+        int kCpy=k;
+        while(i<n){
+            if(s[i]=='0'){
+                mCnt++;
+                if(mCnt==m){
+                    while(i<s.length() && kCpy--){
+                        s[i]='1';
+                        i++;
+                    }
+                    kCpy=k;
+                    ct++;
+                    mCnt=0;
+                }
+                else{
+                    i++;
+                }
             }
-            
+            else{
+                mCnt=0;
+                i++;
+            }
         }
 
         cout<<ct<<endl;
