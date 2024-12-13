@@ -43,37 +43,31 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        ll n;
+        int n;
         cin>>n;
+        string s;
+        cin>>s;
 
-        if(n%2==0){
-            for(int i=0; i<n/2; i++){
-                cout<<i+1<<" "<<i+1<<" ";
+        int zrs=0;
+        int ons=0;
+        
+        int interfaces=0;
+        for(int i=0; i<n-1; ++i){
+            if(s[i]!=s[i+1]){
+                interfaces++;
             }
-            cout<<endl;
+        }
+        int first= s[0]-'0';
+
+        if(interfaces%2!=0 || interfaces==0){
+            yes();
         }
         else{
-            if(n<27){
-                cout<<-1<<endl;
+            if(first==0){
+                no();
             }
             else{
-                int x=3;
-                int i=0;
-                while(i<n){
-                    if(i==1 || i==10 || i==26){
-                        cout<<1<<" ";
-                        i++;
-                    }
-                    else if(i==0 || i==25){
-                        cout<<2<<" ";
-                        i++;
-                    }
-                    else{
-                        cout<<x<<" "<<x<<" ";
-                        x++;
-                        i+=2;
-                    }
-                }
+                yes();
             }
         }
     }
