@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; }
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -43,54 +43,34 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        int n;
+        ll n;
         cin>>n;
 
         vll arr(n);
         inv;
 
-        vll prefixArr(n);
-        for(int i=0; i<n; ++i){
-            if(i==0){
-                prefixArr[i]=arr[i];
-            }
-            else{
-                prefixArr[i]=prefixArr[i-1]+arr[i];
-            }
+        vll sol(n+1);
+        sol[0]=0;
+        for(ll i=0; i<n; ++i){
+            sol[i+1]=sol[i]+arr[i];
         }
 
-        int segments=0;
-        int currentEnd=-1;
-        int currSt=0;
-        map<int,int> myMap;
-        bool still0=true;
+        ll segs=0;
+        map<ll,ll> myMap;
+        //int currEnd=0;
 
-        for(int i=0; i<n; ++i){
-            int x= prefixArr[i];
-            if(x==0 && still0){
-                segments++;
-                currentEnd=i;
-            }
-            else{
-                still0=false;
-            }
-
-            if(myMap.find(x)==myMap.end() && !still0){
+        for(ll i=0; i<n+1; ++i){
+            ll x= sol[i];
+            if(myMap.find(x)==myMap.end()){
                 myMap[x]=i;
             }
-            else if(!still0 && myMap.find(x)!=myMap.end()){
-                if(myMap[x]>=currentEnd){
-                    segments++;
-                    myMap.erase(x);
-                    currentEnd=i;
-                    myMap[x]=i;
-                }
-                else{
-                    myMap.erase(x);
-                }
+            else{
+                segs++;
+                myMap.clear();
+                myMap[x]=i;
             }
         }
 
-        cout<<segments<<endl;
+        cout<<segs<<endl;
     }
 }
