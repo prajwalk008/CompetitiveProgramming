@@ -43,29 +43,59 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        int n;
+        ll n;
         cin>>n;
-        string s;
-        cin>>s;
+        string s,r;
+        cin>>s>>r;
 
-        bool isSolved=0;
-        
-        if(s[0]=='1' || s[n-1]=='1'){
-            yes();
-            isSolved=1;
+        int s0=0,s1=0;
+        for(int i=0; i<n; i++){
+            if(s[i]=='0'){
+                s0++;
+            }
+            else if(s[i]=='1'){
+                s1++;
+            }
+        }
+        bool flag= false;
+        if(s0==0 || s1==0){
+            no();
         }
         else{
-            for(int i=1; i<n-1; ++i){
-                if(s[i]=='1' && s[i+1]=='1'){
-                    yes();
-                    isSolved=1;
-                    break;
-                    
+            for(int i=0; i<n-1; i++){
+                if(r[i]=='0'){
+                    s1--;
+                    if(s1==0 && s0>1){
+                        no();
+                        flag=1;
+                        break;
+                    }
+                    else if(s1==0 && s0==1){
+                        yes();
+                        flag=1;
+                        break;
+                    }
+                }
+                else if(r[i]=='1'){
+                    s0--;
+                    if(s0==0 && s1>1){
+                        no();
+                        flag=1;
+                        break;
+                    }
+                    else if(s0==0 && s1==1){
+                        yes();
+                        flag=1;
+                        break;
+                    }
                 }
             }
-            if(!isSolved){
-                no();
-            }
+
+            if(!flag){
+            yes();
         }
+        }
+        
+       
     }
 }
