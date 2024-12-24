@@ -38,6 +38,80 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+bool isSuitable(vll arr, ll k){
+    int addn=-1;
+    int addnU=0;
+    //cout<<"arr s="<<arr.size()<<endl;
+    for(int i=0; i<arr.size(); i++){
+        //cout<<"i="<<i<<endl;
+        //cout<<"addn="<<addn<<endl;
+        if(i==0){
+            //cout<<"i==0"<<endl;
+            if(arr[i+1]>k+arr[i]){
+                //cout<<"arr[i+1]>k+arr[i]"<<endl;
+                addn=min(arr[i]+k,arr[i+1]);
+                addnU=1;
+                //arr[i]=addn;
+
+                if(addn+k<arr[i+1]){
+                    return 0;
+                }
+            }
+        }
+        else if(i==arr.size()-1){
+            //cout<<"i==n-1"<<endl;
+            if(addnU){
+                if(arr[i]-k>addn){ 
+                    addnU=0;
+                    return 0;
+                }
+                else{
+                    return 1;
+                }
+            }
+            else{
+                if(arr[i]-k>arr[i-1] && addn==-1){ 
+                    return 1;
+                }
+                else if(arr[i]-k>arr[i-1] && addn!=-1){
+                    return 0;
+                }
+                return 1;
+            }
+            
+        }
+        else{
+            //cout<<"i==mid"<<endl;
+            int minD;
+            if(addnU){
+                minD= min(abs(arr[i]-arr[i+1]),abs(arr[i]-addn));
+                addnU=0;
+            }
+            else{
+                minD= min(abs(arr[i]-arr[i+1]),abs(arr[i]-arr[i-1]));
+            }
+            //cout<<"minD= "<<minD<<endl;
+
+            if(minD>k){
+                if(addn==-1){
+                    addn= arr[i]+k;
+                    addnU=1;
+
+                    if(addn+k<arr[i+1]){
+                        return 0;
+                    }
+                }
+                else{
+                    return 0;
+                }
+            }
+
+        }
+    }
+
+    return 1;
+}
+
 
 int main(){
     int t;
@@ -45,10 +119,11 @@ int main(){
     while(t--){
         int n;
         cin>>n;
-        
+
         vll arr(n);
         inv;
 
+        //cout<<"========="<<endl;
         if(n==1){
             cout<<1<<endl;
         }
@@ -56,21 +131,31 @@ int main(){
             cout<<arr[1]-arr[0]<<endl;
         }
         else{
-            vll diff(n-1);
-            for(int i=0; i<n-1; i+=2){
-                diff[i]=arr[i+1]-arr[i];
-            }
-            sort(diff.begin(),diff.end());
+            ll s=1;
+            ll e= arr[n-1];
+            ll mid= s+(e-s)/2;
+            
+            ll k;
 
-            if(n%2==0){
-
+            while(s<=e){
+                // cout<<"--------"<<endl;
+                // cout<<s<<" "<<e<<" "<<mid<<" "<<endl;
+                bool flag= isSuitable(arr,mid);
+                //cout<<flag<<endl;
+                if(flag){
+                    
+                    k=mid;
+                    e=mid-1;
+                }
+                else{
+                    s=mid+1;
+                }
+                mid= s+(e-s)/2;
             }
+
+            cout<<k<<endl;
         }
 
-        
-        
-        
-        
         
     }
 }
