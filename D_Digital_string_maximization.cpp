@@ -45,7 +45,40 @@ int main(){
     while(t--){
         string s;
         cin>>s;
+        int n= s.length();
 
-        
+        stack<int> st;
+        stack<int> st2;
+        string sol;
+
+        for(int i=0; i<n; i++){
+            char t= s[i];
+
+            int x= t-'0';
+
+            while(!st.empty() && x!=0 && st.top()<x-1){
+                st2.push(st.top());
+                st.pop();
+                x--;
+            }
+
+            st.push(x);
+
+            while(!st2.empty()){
+                st.push(st2.top());
+                st2.pop();
+            }
+
+
+        }
+
+        while(!st.empty()){
+            sol+=st.top()+'0';
+            st.pop();
+        }
+
+        reverse(sol.begin(),sol.end());
+
+        cout<<sol<<endl;
     }
 }

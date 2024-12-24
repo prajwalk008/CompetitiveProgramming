@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; }
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -46,45 +46,34 @@ int main(){
         int n;
         cin>>n;
 
-        int sum=0;
-        int os=0;
-        int es=0;
+        int oddsum=0;
+        int evensum=0;
+        //int sum=0;
+        int oddn=0,even=0;
+        //vll arr(n);
+        for(int i=0; i<n; i++){
+            int x;
+            cin>>x;
+            //sum+=arr[i];
 
-        vll arr(n);
-        for(int i=0; i<n; ++i){
-            cin>>arr[i];
-            sum+=arr[i];
             if(i%2==0){
-                es+=arr[i];
+                evensum+=x;
+                even++;
             }
             else{
-                os+=arr[i];
+                oddsum+=x;
+                oddn++;
             }
+        }
+        //cout<<oddsum<<" "<<evensum<<" "<<" "<<oddn<<" "<<even<<endl;
+
+        if(oddsum%oddn!=0 || evensum%even!=0 || oddsum/oddn !=evensum/even){
+            no();
+        }
+        else{
+            yes();
         }
 
-        int on;
-        int en;
-        if(n%2==0){
-            on=n/2;
-            en=n/2;
-        }
-        else{
-            en=(n/2)+1;
-            on=n/2;
-        }
-        //cout<<es<<endl;
-        int avg= sum/n;
-        //cout<<avg<<endl;
-        if(sum%n != 0){
-            cout<<"NO"<<endl;
-        }
-        else{
-            if(os/on !=avg || es/en!=avg){
-                cout<<"NO"<<endl;
-            }
-            else{
-                cout<<"YES"<<endl;
-            }
-        }
+        
     }
-}   
+} 

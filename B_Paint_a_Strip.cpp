@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; }
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -38,11 +38,48 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solve(){
+    int n;
+    cin>>n;
+
+
+    if(n==1){
+        cout<<1<<endl;
+        return;
+    }
+    else if(n>1 && n<=4){
+        cout<<2<<endl;
+        return;
+    }
+    else{
+        int ct=2;
+        int sum=4;
+        int ni= (sum+1)*2;
+
+        while(ni<n){
+            sum=ni;
+            ct++;
+            ni= (sum+1)*2;
+        }
+
+        ct++;
+
+        cout<<ct<<endl;
+        return;
+
+
+
+
+
+    }
+}
+
 
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solve();
+
     }
 }
