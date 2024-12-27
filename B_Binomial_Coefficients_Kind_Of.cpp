@@ -38,56 +38,26 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+ll fxn(){
+
+}
+
+void solvekr(){
+    ll t;
+    cin>>t;
+
+    vll arr(t);
+    for(int i = 0; i < t; ++i) cin >> arr[i];
+
+    vll arrk(t);
+    for(int i = 0; i < t; ++i) cin >> arrk[i];
+
+    for(ll i=0; i<t; i++){
+        
+    }
+}
+
 
 int main(){
-    int t;
-    cin>>t;
-    while(t--){
-        ll n,k;
-        cin>>n>>k;
-
-        vll arr(n);
-        inv;
-
-        sort(arr.begin(),arr.end());
-        //print_v(arr);
-
-        map<int,int> freq;
-
-        int i=0;
-        int j=0;
-        int ans=0;
-        int elect=0;
-
-        while(j<n){
-
-            int span= arr[j]-arr[i]+1;
-            elect=j-i+1;
-
-            if(j!=0 && arr[j]-arr[max(i,j-1)]>1){
-                ans=max(ans,elect-1);
-                i=j;
-            }
-            else{
-                if(span>k){
-                    i+=freq[arr[i]];
-                    ans=max(ans,elect-1);
-                    //j++;
-
-                }
-                else{
-                    freq[arr[j]]++;
-                    j++;
-                }
-            }
-            
-            
-            
-        }
-        ans= max(ans,elect);
-
-        cout<<ans<<endl;
-
-
-    }
+    solvekr();  
 }
