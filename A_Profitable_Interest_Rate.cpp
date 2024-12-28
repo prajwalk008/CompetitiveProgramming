@@ -39,33 +39,23 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n;
-    cin>>n;
+    ll a,b;
+    cin>>a>>b;
 
-    vector<vll> mainv;
+    if(a>=b){
+        cout<<a<<endl;
+        return;
+    }
+    else{
+        ll left= 2*a-b;
 
-    for(ll i=0; i<n; i++){
-        vll arr(2);
-        for(int j=0; j<2; j++){
-            cin>>arr[j];
+        if(left<0){
+            cout<<0<<endl;
         }
-        //print_v(arr);
-
-        mainv.push_back(arr);
+        else{
+            cout<<left<<endl;
+        }
     }
-    //cout<<mainv.size()<<endl;
-
-    sort(mainv.begin(),mainv.end());
-
-
-    for(ll i=0; i<n; i++){
-        cout<<mainv[i][0]<<" "<<mainv[i][1]<<" ";
-        
-    }
-    cout<<endl;
-    
-
-
 }
 
 

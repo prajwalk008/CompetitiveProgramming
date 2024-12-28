@@ -38,33 +38,44 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+bool ok(ll mid, ll sum, ll x){
+    if(ceil(sum/(1.0*mid)<=x)){
+        return 1;
+    }
+    return 0;
+}
+
 void solvekr(){
-    ll n;
-    cin>>n;
+    ll n,x;
+    cin>>n>>x;
 
-    vector<vll> mainv;
-
+    vll arr(n);
+    ll sum=0;
+    ll maxi=INT64_MIN;
     for(ll i=0; i<n; i++){
-        vll arr(2);
-        for(int j=0; j<2; j++){
-            cin>>arr[j];
+        cin>>arr[i];
+        sum+=arr[i];
+        maxi= max(maxi,arr[i]);
+    }
+
+    ll s= maxi;
+    ll e= sum;
+    ll ans= sum;
+    ll mid= s+(e-s)/2;
+
+    while(s<=e){
+        if(ok(mid,sum, x)){
+            ans=mid;
+            e=mid-1;
         }
-        //print_v(arr);
-
-        mainv.push_back(arr);
+        else{
+            s=mid+1;
+        }
+        mid= s+(e-s)/2;
     }
-    //cout<<mainv.size()<<endl;
 
-    sort(mainv.begin(),mainv.end());
-
-
-    for(ll i=0; i<n; i++){
-        cout<<mainv[i][0]<<" "<<mainv[i][1]<<" ";
-        
-    }
-    cout<<endl;
+    cout<<ans<<endl;
     
-
 
 }
 
