@@ -39,86 +39,20 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    //cout<<"==========="<<endl;
-    ll n;
-    cin>>n;
+    ll n,m,q;
+    cin>>n>>m>>q;
 
-    vll arr(n);
-    inv;
-    //print_v(arr);
+    vll arr(m);
+    for(int i = 0; i < m; ++i) cin >> arr[i];
 
-    string s;
-    cin>>s;
-
-    //cout<<s<<endl;
-    map<ll,char> blkW;
-    for(ll i=0; i<n; i++){
-        if(s[i]=='0'){
-            blkW[arr[i]]='0';
-        }
-        else{
-            blkW[arr[i]]='1';
-        }
-    }
-    map<ll,bool> used;
-    map<ll,ll> zeroct;
-    for(ll i=0; i<n; i++){
-        if(!used[arr[i]]){
-            ll x=arr[i];
-            ll y=arr[x-1];
-            ll zeroes=0;
-            if(blkW[x]=='0'){
-                zeroes++;
-            }
-            used[x]=1;
-
-            while(x!=y){
-                used[y]=1;
-                if(blkW[y]=='0'){
-                    zeroes++;
-                }
-                y=arr[y-1];
-                
-                
-            }
-
-
-            zeroct[x]=zeroes;
-        }
-    }
-    // for(auto i:zeroct){
-    //     cout<<i.first<<"->"<<i.second<<endl; 
-    // }
-
-    // for(ll i=0; i<n; i++){
-    //     //cout<<arr[i]<<" ";
-    //     cout<<zeroct[arr[i]]<<" ";
-    // }
-
-    map<ll,bool> used2;
-
-    for(ll i=0; i<n; i++){
-        if(!used2[arr[i]]){
-            used2[arr[i]]=1;
-            ll x=arr[i];
-            ll y=arr[x-1];
-
-            ll zeroctx= zeroct[x];
-
-            while(x!=y){
-                used2[y]=1;
-                zeroct[y]=zeroctx;
-                y=arr[y-1];
-            }
-        }
+    vll que(q);
+    for(ll i=0; i<q; i++){
+        cin>>que[i];
     }
 
-    for(ll i=0; i<n; i++){
-        //cout<<arr[i]<<" ";
-        cout<<zeroct[arr[i]]<<" ";
-    }
-    cout<<endl;
     
+
+
 }
 
 
