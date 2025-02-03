@@ -38,10 +38,38 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll n;
+    cin>>n;
+
+    vll arr(n);
+    inv;
+
+    vll brr(2*n,0);
+    for(ll i=0; i<n; i++){
+        ll idx= arr[i];
+        idx--;
+        brr[idx]++;
+    }
+
+    ll oddidxFrogs=0,eveidxFrogs=0;
+
+    for(ll i=0; i<(2*n); i++){
+        if(i%2==0){
+            eveidxFrogs+=brr[i];
+        }
+        else{
+            oddidxFrogs+=brr[i];
+        }
+    }
+
+    cout<<max(oddidxFrogs,eveidxFrogs)<<endl;
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

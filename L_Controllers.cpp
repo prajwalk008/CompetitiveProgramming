@@ -39,9 +39,62 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 int main(){
-    int t;
-    cin>>t;
-    while(t--){
-        
+    ll n;
+    cin>>n;
+
+    string s;
+    cin>>s;
+
+    ll p=0;
+    ll m=0;
+
+    for(ll i=0; i<s.length(); i++){
+        if(s[i]=='+'){
+            p++;
+        }
+        else{
+            m++;
+        }
     }
+
+
+
+    ll q;
+    cin>>q;
+
+    while(q--){
+        ll a,b;
+        cin>>a>>b;
+
+        if(a==b && p!=m){
+            no();
+        }
+        else if(a==b && p==m){
+            yes();
+        }
+        else{
+            ll Nr= b*abs(m-p);
+            ll Dr= abs(a-b);
+            //cout<<Dr<<endl;
+
+            if(Nr%Dr==0){
+                ll div= Nr/Dr;
+                //cout<<div<<" "<<-1*m<<" "<<p<<endl;
+                if(div>=min(-1*p,-1*m) && div<=max(p,m)){
+                    yes();
+                }
+                else{
+                    //cout<<"hh"<<endl;
+                    no();
+                }
+            }
+            else{
+                no();
+            }
+        }
+    }
+
+    return 0;
+
+
 }

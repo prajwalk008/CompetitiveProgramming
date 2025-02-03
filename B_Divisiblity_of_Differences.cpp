@@ -38,10 +38,39 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
-int main(){
-    int t;
-    cin>>t;
-    while(t--){
+void solvekr(){
+    ll n,k,m;   
+    cin>>n>>k>>m;
+
+    vll arr(n);
+    inv;
+    
+    map<ll,vll> modFreq;
+
+    for(ll i=0; i<n; i++){
+        ll x= arr[i];
+        ll mod= x%m;
+
+        modFreq[mod].push_back(x);
+
+        if(modFreq[mod].size()>=k){
+            cout<<"Yes"<<endl;
+            for(ll i=0; i<modFreq[mod].size(); i++){
+                cout<<modFreq[mod][i]<<" ";
+            }
+            cout<<endl;
+            return;
+        }
+
+
+
         
     }
+    cout<<"No"<<endl;
+
+    
+}
+
+int main(){
+    solvekr();
 }

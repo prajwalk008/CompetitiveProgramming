@@ -12,6 +12,7 @@ using namespace std;
 #define si set<int>
 #define sc set<char>
 
+
 //fxns
 #define f(i,s,e) for(long long int i=s;i<e;i++)
 #define cf(i,s,e) for(long long int i=s;i<=e;i++)
@@ -38,10 +39,43 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll m,k;
+    cin>>m>>k;
+
+    string s;
+    cin>>s;
+
+    ll sD=0;
+    ll pD=0;
+
+    for(auto i:s){
+        if(i=='S'){
+            sD++;
+        }
+        else{
+            pD++;
+        }
+    }
+
+    // He was unable to win
+    ll sreq= k-sD;
+
+    ll n=s.length();
+
+    if(sreq>0){
+        n+=sreq-1;
+    }
+
+    cout<<n<<endl;
+
+
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

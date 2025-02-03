@@ -38,10 +38,71 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(int t){
+    //cout<<"for t="<<t<<endl;
+    ll n;
+    cin>>n;
+
+    vector<string> arr(n);
+    ll i=0;
+    while(i<n){
+        string s;
+        cin>>s;
+        //cout<<s<<endl;
+        arr[i]=s;
+        i++;
+    }
+    // for(auto it:arr){
+    //     cout<<it<<endl;
+    // }
+
+    set<ll> nums;
+    //cout<<nums.size()<<endl;
+    for(ll j=0; j<n; j++){
+        nums.insert(j+1);
+        //cout<<j+1<<endl;
+    }
+    //cout<<nums.size()<<endl;
+    // for(auto jt:nums){
+    //     cout<<jt<<" ";
+    // }
+
+    vector<ll> ans;
+
+    
+    //cout<<nums.size()<<endl;
+
+    while(nums.size()!=0){
+        ll toAdd= *nums.begin();
+
+        for(auto it:nums){
+            if(arr[toAdd-1][it-1]=='1'){
+                if(toAdd>it){
+                    toAdd=it;
+                }
+            }
+            else{
+                if(toAdd<it){
+                    toAdd=it;
+                }
+            }
+        }
+
+        ans.push_back(toAdd);
+        nums.erase(toAdd);
+    }
+    //cout<<"Got here!"<<endl;
+    //print_v(ans);
+    for(ll j=0; j<ans.size(); j++){
+        cout<<ans[j]<<" ";
+    }
+    cout<<endl;
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr(t);
     }
 }

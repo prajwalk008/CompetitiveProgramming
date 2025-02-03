@@ -38,10 +38,42 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll a,b,c,d;
+    cin>>a>>b>>c>>d;
+
+    ll x1= a+b;
+    ll x2= c-b;
+    ll x3= d-c;
+
+    if(x1==x2 && x1==x3){
+        cout<<3<<endl;
+        return;
+    }
+    if(x1==x2){
+        cout<<2<<endl;
+        return;
+    }
+    if(x2==x3){
+        cout<<2<<endl;
+        return;
+    }
+    if(x1==x3){
+        cout<<2<<endl;
+        return;
+    }
+
+    else{
+        cout<<1<<endl;
+        return;
+    }
+
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

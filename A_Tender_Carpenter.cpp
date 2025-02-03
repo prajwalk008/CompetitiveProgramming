@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -38,10 +38,53 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+bool isGoodTriangle(ll a,ll b){
+    if(a<b){
+        return 2*a>b;
+    }
+    else if(a==b){
+        return true;
+    }
+    else if(a>b){
+        return 2*b>a;
+    }
+}
+
+
+void solvekr(){
+    ll n;
+    cin>>n;
+
+    vll arr(n);
+    inv;
+
+    bool oneGDTri=0;
+    for(ll i=0; i<n-1; i++){
+        if(isGoodTriangle(arr[i],arr[i+1])){
+            oneGDTri=1;
+            break;
+        }
+    }
+
+
+    if(!oneGDTri){
+        no();
+    }
+    else{
+        yes();
+
+    }
+
+    
+
+    
+}
+
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

@@ -38,10 +38,64 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll n;
+    cin>>n;
+
+    map<ll,ll> kitneConnected;
+    map<ll,vector<ll>> konkonC;
+
+    ll maxC=0;
+    ll maxKiske=-1;
+    for(ll i=0; i<n-1; i++){
+        ll a,b;
+        cin>>a>>b;
+
+        kitneConnected[a]++;
+        kitneConnected[b]++;
+
+        konkonC[a].push_back(b);
+        konkonC[b].push_back(a);
+
+        ll rep;
+        if(kitneConnected[a]>maxC || kitneConnected[b]>maxC){
+            rep= kitneConnected[a]>kitneConnected[b]?a:b;
+            maxKiske=rep;
+            maxC=max(kitneConnected[a],kitneConnected[b]);
+        }
+    } 
+
+    ll parts=0;
+    ll first= maxC;
+    kitneConnected[maxKiske]=0;
+
+    parts+=first-1;
+
+    for(auto i:konkonC[maxKiske]){
+        kitneConnected[i]--;
+    }
+
+    ll mc2=0;
+    for(auto it:kitneConnected){
+        ll rep;
+        if(it.second>mc2){
+            mc2=it.second;
+            maxKiske=it.first;
+        }
+    }
+
+    ll second= kitneConnected[maxKiske];
+    kitneConnected[maxKiske]=0;
+
+    parts+= second;
+
+    cout<<parts<<endl;
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

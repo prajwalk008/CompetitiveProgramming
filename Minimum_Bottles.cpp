@@ -38,10 +38,28 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll n,x;
+    cin>>n>>x;
+
+    ll totalw=0;
+    vll arr(n);
+    for(ll i=0; i<n; i++){
+        cin>>arr[i];
+        totalw+=arr[i];
+    }
+
+    ll minBots= ceil(totalw/(x*1.0));
+
+    cout<<minBots<<endl;
+
+
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

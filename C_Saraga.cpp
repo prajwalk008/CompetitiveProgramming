@@ -38,10 +38,43 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
-int main(){
-    int t;
-    cin>>t;
-    while(t--){
-        
+void solvekr(){
+    string s,t;
+    cin>>s>>t;
+
+    map<char,ll> lastOcc;
+
+    for(ll i=0; i<t.length()-1; i++){
+        lastOcc[t[i]]=i;
     }
+    
+
+    ll minLen=INT_MAX;
+    string minStr;
+
+    for(ll j=1; j<s.length(); j++){
+        char t1= s[j];
+        if(lastOcc.find(t1)!=lastOcc.end()){
+            //minLen=min(minLen,t.length()-lastOcc[t1]);
+            ll newL= t.length()-lastOcc[t1]+j;
+            if(newL<minLen){
+                minStr="";
+                minLen=newL;  
+                minStr+=s.substr(0,j);
+                minStr+=t.substr(lastOcc[t1],t.length()-lastOcc[t1]);
+                //cout<<minStr<<endl;
+            }
+        }
+    }
+
+    if(minLen==INT_MAX){
+        cout<<-1<<endl;
+    }
+    else{
+        cout<<minStr<<endl;
+    }
+}
+
+int main(){
+    solvekr();
 }

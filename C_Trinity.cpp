@@ -38,10 +38,67 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+ll maxValidFinder(vll& arr, ll i){
+    ll s=i+2,e=arr.size()-1;
+    ll mid= s+(e-s)/2;
+    ll sump= arr[i]+arr[i+1];
+
+    ll largerIndex=-1;
+
+    while(s<=e){
+        if(arr[mid]>=sump){
+            e=mid-1;
+        }
+        else{
+            largerIndex=mid;
+            s=mid+1;
+        }
+        mid= s+(e-s)/2;
+    }
+
+    if(largerIndex==-1){
+        return 0;
+    }
+    return largerIndex-i+1;
+
+    
+
+
+}
+
+
+
+void solvekr(){
+    ll n;
+    cin>>n;
+
+    vll arr(n);
+    inv;
+
+    sort(arr.begin(),arr.end());
+
+    ll maxValid=LONG_MIN;
+
+    for(ll i=0; i<n-2; i++){
+        ll maxi= maxValidFinder(arr,i);
+        
+
+        maxValid=max(maxValid,maxi);
+    }
+
+    if(maxValid==0){
+        cout<<n-2<<endl;
+        return;
+    }
+
+    cout<<n-maxValid<<endl;
+    return;
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

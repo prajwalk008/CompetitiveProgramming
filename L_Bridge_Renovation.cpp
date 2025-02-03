@@ -38,10 +38,56 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
-int main(){
-    int t;
-    cin>>t;
-    while(t--){
+void solvekr(){
+    ll n;
+    cin>>n;
+
+    if(n==1){
+        cout<<2<<endl;
+        return;
+    }
+    if(n==2){
+        cout<<3<<endl;
+        return;
+    }
+    ll planksUsed=0;
+    if(n%3==0){
+        ll ett=n/3;
+        ll eet=n/3;
+        ll t5= ceil(n/2.0);
+        planksUsed+=ett+eet+t5;
+        cout<<planksUsed<<endl;
+
+    }
+    else if(n%3==1){
+        ll ett=n/3;
+        ll eet=(n/3)+1;
+        ll t5= ceil(n/2.0);
+        planksUsed+=ett+eet+t5;
+        cout<<planksUsed<<endl;
+    }
+    else if(n%3==2){
+        if(n%2==0){
+            ll ett=(n/3)+2;
+            ll eet=(n/3);
+            ll t5= ceil(n/2.0);
+            planksUsed+=ett+eet+t5;
+            cout<<planksUsed<<endl;
+        }
+        else{
+            ll ett=(n/3)+1;
+            ll eet=(n/3);
+            ll t5= ceil(n/2.0);
+            planksUsed+=ett+eet+t5;
+            cout<<planksUsed<<endl;
+        }
         
     }
+
+
+}
+
+int main(){
+    solvekr();
+    ll i=INT_MAX;
 }

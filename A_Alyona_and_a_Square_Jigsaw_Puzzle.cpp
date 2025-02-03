@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -38,10 +38,58 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+
+
+bool isGood(ll sum,ll y){
+    //cout<<"y="<<y<<endl;
+    while(y*y<sum){
+        //cout<<"y="<<y<<endl;
+        y++;
+    }
+    if(y*y==sum){
+        //cout<<"y="<<y<<endl;
+        if(y%2!=0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    else if(y*y>sum){
+        //cout<<"y="<<y<<endl;
+        y--;
+        return false;
+    }
+}
+
+void solvekr(){
+    //cout<<"================"<<endl;
+    ll n;
+    cin>>n;
+
+    ll sum=0;
+    ll happyDays=0;
+    ll y=1;
+    while(n--){
+        ll x;
+        cin>>x;
+        sum+=x;
+        //cout<<"sum="<<sum<<endl;
+        if(isGood(sum,y)){
+            happyDays++;
+        }
+    }
+    
+
+    cout<<happyDays<<endl;
+
+
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

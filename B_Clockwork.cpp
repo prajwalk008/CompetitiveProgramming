@@ -38,10 +38,37 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll n;
+    cin>>n;
+
+    vll arr(n);
+    inv;
+    
+    vll farthestpt(n);
+    for(ll i=0; i<n; i++){
+        if(i<ceil(n/2.0)){
+            farthestpt[i]=2*(n-i-1);
+        }
+        else{
+            farthestpt[i]=farthestpt[n-i-1];
+        }
+        
+    }
+
+    for(ll i=0; i<n; i++){
+        if(arr[i]<=farthestpt[i]){
+            no();
+            return;
+        }
+    }
+    yes();
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

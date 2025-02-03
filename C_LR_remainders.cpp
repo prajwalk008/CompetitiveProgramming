@@ -38,10 +38,69 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll n,m;
+    cin>>n>>m;
+
+    vll arr(n);
+    inv;
+
+    string s;
+    cin>>s;
+
+    vll ans;
+    //cout<<ans.size()<<endl;
+
+    ll stpt=0;
+    for(ll i=0; i<n-1; i++){
+        char t= s[i];
+
+        if(t=='L'){
+            stpt++;
+        }
+    }
+    //cout<<stpt<<edpt<<endl;
+
+
+    ll j=stpt;
+    ll lctr=0;
+    ll rctr=0;
+    ans.push_back(arr[j]%m);
+    for(ll i=n-2; i>=0; i--){
+        char t= s[i];
+
+        if(t=='R'){
+            rctr++;
+            j=stpt+rctr;
+        }
+        else{
+            lctr++;
+            j=stpt-lctr;
+        }
+
+        ll lastEle= ans[ans.size()-1];
+        //cout<<"<<lastEle<<<<arr[j]<<endl;
+        ans.push_back((lastEle*arr[j])%m);
+
+
+    }
+    //cout<<ans.size()<<endl;
+
+    reverse(ans.begin(),ans.end());
+
+    for(ll i=0; i<n; i++){
+        cout<<ans[i]<<" ";
+
+    }
+    cout<<endl;
+
+
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

@@ -38,10 +38,63 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
-int main(){
-    int t;
-    cin>>t;
-    while(t--){
+void solvekr(){
+    string s;
+    cin>>s;
+
+    ll n= s.length();
+
+    map<char,ll> lastIdx;
+    map<char,ll> maxDiff;
+    
+    
+    for(ll i=0; i<n; i++){
+        char t=s[i];
+
+        if(lastIdx.find(t)==lastIdx.end()){
+            lastIdx[t]=i;
+            ll diff= i+1;
+            maxDiff[t]=max(maxDiff[t],diff);
+        }
+        else{
+            ll lstIdx= lastIdx[t];
+            lastIdx[t]=i;
+            
+            ll diff= i-lstIdx;
+            maxDiff[t]=max(diff,maxDiff[t]);
+
+        }
+ 
+    }
+
+    for(auto it:lastIdx){
+        maxDiff[it.first]=max(maxDiff[it.first],n-lastIdx[it.first]);
+    }
+
+    
+
+    
+    
+
+    ll minGap=INT_MAX;
+    for(auto it:maxDiff){
+        minGap=min(minGap,it.second);
+    }
+
+    if(minGap==INT_MAX){
+        if(n%2==0){
+            minGap=(n/2)+1;
+        }
+        else{
+            minGap=ceil(n/2.0);
+        }
         
     }
+    
+
+    cout<<minGap<<endl;
+}
+
+int main(){
+    solvekr();
 }

@@ -38,10 +38,56 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+vll diffArr(vll& arr){
+    vll k(arr.size()-1);
+
+    for(ll i=1; i<arr.size(); i++){
+        k[i-1]= arr[i]-arr[i-1];
+    }
+
+    return k;
+}
+
+
+void solvekr(){
+    ll n;
+    cin>>n;
+
+    vll arr(n);
+    inv;
+
+    vll arrcpy=arr;
+
+    ll maxSum=LONG_MIN;
+
+    while(arrcpy.size()>0){
+
+        ll normalsum= accumulate(arrcpy.begin(),arrcpy.end(),0L);
+        maxSum=max(maxSum,normalsum);
+
+        if(arrcpy.size()>1){
+            vll diffArray= diffArr(arrcpy);
+
+            normalsum= abs(accumulate(diffArray.begin(),diffArray.end(),0LL ));
+
+            maxSum=max(maxSum,normalsum);
+
+            arrcpy=diffArray;
+        }
+        else{
+            break;
+        }
+
+
+    }
+
+    cout<<maxSum<<endl;
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

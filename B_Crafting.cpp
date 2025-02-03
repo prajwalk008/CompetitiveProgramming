@@ -38,10 +38,50 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll n;
+    cin>>n;
+
+    vll arr(n);
+    inv;
+
+    vll brr(n);
+    for(auto &it:brr){
+        cin>>it;
+    }
+
+    ll negs=0, minPos=INT_MAX, negative=-1;
+
+    for(ll i=0; i<n; i++){
+        if(arr[i]-brr[i]<0 && negs==0){
+            negs++;
+            negative=abs(arr[i]-brr[i]);
+        }
+        else if(arr[i]-brr[i]<0 && negs>0){
+            no();
+            return;
+        }
+        else if(arr[i]-brr[i]>=0){
+            minPos=min(minPos,arr[i]-brr[i]);
+        }
+    }
+
+    if(minPos>=negative){
+        yes();
+    }
+    else{
+        no();
+    }
+
+
+
+    
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

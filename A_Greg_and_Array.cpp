@@ -38,10 +38,92 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
-int main(){
-    int t;
-    cin>>t;
-    while(t--){
+void solvekr(){
+    ll n,m,k;
+    cin>>n>>m>>k;
+
+    vll arr(n);
+    inv;
+
+    vvi operations(m,vi(3));
+    ll i=0;
+    while(i<m){
+        int l,r,d;
+        cin>>l>>r>>d;
+        operations[i][0]=l;
+        operations[i][1]=r;
+        operations[i][2]=d;
+
+        i++;
+    }
+
+    vi ops(m);
+    //print_v(ops);
+
+    while(k--){
+        ll x,y;
+        cin>>x>>y;
+
+        x--;
+        y--;
+
+        ops[x]+=1;
+        if(y<m-1){
+            ops[y+1]-=1;
+        }
         
     }
+    
+
+
+    for(ll a=1; a<m; a++){
+        ops[a]+=ops[a-1];
+    }
+    //print_v(ops);
+    //cout<<ops.size()<<endl;
+
+    ll j=0;
+    vll preArr(n);
+    while(j<m){
+        ll l,r,d;
+        l= operations[j][0];
+        r=operations[j][1];
+        d= operations[j][2];
+
+        l--;
+        r--;
+        d=d*ops[j];
+
+        preArr[l]+=d;
+        if(r<n-1){
+            preArr[r+1]-=d;
+        }
+        //print_v(preArr);
+
+        j++;
+
+    }
+
+
+    for(ll l=1; l<n; l++){
+        preArr[l]+=preArr[l-1];
+    }
+    for(ll l=0; l<n; l++){
+        preArr[l]+=arr[l];
+    }
+
+    //print_v(preArr);
+
+    for(ll l=0; l<n; l++){
+        cout<<preArr[l]<<" ";
+    }
+    cout<<endl;
+
+
+
+
+}
+
+int main(){
+    solvekr();
 }

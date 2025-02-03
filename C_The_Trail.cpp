@@ -38,10 +38,61 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll n,m;
+    cin>>n>>m;
+
+    string s;
+    cin>>s;
+
+    vector<vector<ll>> matrix(n,vector<ll>(m));
+
+    for(ll i=0; i<n; i++){
+        for(ll j=0; j<m; j++){
+            cin>>matrix[i][j];
+        }
+    }
+    
+
+    ll currX=0;
+    ll currY=0;
+    for(ll i=0; i<s.length(); i++){
+        if(s[i]=='D'){
+            ll rowSum= accumulate(matrix[currX].begin(),matrix[currX].end(),0LL);
+            //cout<<rowSum<<endl;
+            //cout<<currX<<","<<currY<<endl;
+            matrix[currX][currY]= 0-rowSum;
+            currX++;
+        }
+        else{
+            ll columnSum=0;
+            for(ll i=0; i<n; i++){
+                columnSum+=matrix[i][currY];
+            }
+            //cout<<columnSum<<endl;
+            //cout<<currX<<","<<currY<<endl;
+            matrix[currX][currY]= 0-columnSum;
+            currY++;
+
+        }
+    }
+
+    ll lastRowSum= accumulate(matrix[currX].begin(),matrix[currX].end(),0LL);
+    matrix[n-1][m-1]= 0-lastRowSum;
+
+    for(ll i=0; i<n; i++){
+        for(ll j=0; j<m; j++){
+            cout<<matrix[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+    
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

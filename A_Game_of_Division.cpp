@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -38,10 +38,56 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+ll isGood(vll& arr, ll k){
+    ll n= arr.size();
+    ll sol=-1;
+    for(ll i=0; i<n; i++){
+        bool mila=1;
+        for(ll j=0; j<n; j++){
+            if(i!=j && abs(arr[i]-arr[j])%k==0){
+                mila=0;
+                break;
+            }
+        }
+        if(mila){
+            sol=i+1;
+            //cout<<"sol="<<sol<<endl;
+            return sol;
+        }
+    }
+
+    return sol;
+}
+
+void solvekr(){
+    //cout<<"+++++++++++++"<<endl;
+    ll n,k;
+    cin>>n>>k;
+
+    vll arr(n);
+    inv;
+
+    if(n==1){
+        yes();
+        cout<<1<<endl;
+        return;
+    }
+
+    ll t= isGood(arr,k);
+
+    if(t==-1){
+        no();
+    }
+    else{
+        yes();
+        cout<<t<<endl;
+    }
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

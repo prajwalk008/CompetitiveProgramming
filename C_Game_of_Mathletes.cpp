@@ -38,10 +38,58 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll n,k;
+    cin>>n>>k;
+
+    map<ll,ll> presentFreq;
+    vll arr(n);
+    for(ll i=0; i<n; i++){
+        cin>>arr[i];
+        presentFreq[arr[i]]++;
+    }
+
+    ll score=0;
+
+    for(ll i=0; i<n; i++){
+        ll x= arr[i];
+        ll y= k-x;
+
+        if(presentFreq[x]>0 && presentFreq[y]>0){
+            if(x!=y){
+                ll mini= min(presentFreq[x],presentFreq[y]);
+                score+=mini;
+            }
+            else{
+                score+= presentFreq[x]/2;
+            }
+            
+            if(presentFreq[x]<presentFreq[y]){
+                //presentFreq[y]-=presentFreq[x];
+                presentFreq[x]=0;
+            }
+            else if(presentFreq[x]==presentFreq[y]){
+                //presentFreq[y]-=presentFreq[x];
+                presentFreq[x]=0;
+            }
+            else{
+                //presentFreq[x]-=presentFreq[y];
+                presentFreq[y]=0;
+            }
+        }
+        
+    }
+
+    cout<<score<<endl;
+    
+
+
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

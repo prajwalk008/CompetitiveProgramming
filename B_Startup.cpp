@@ -38,10 +38,40 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll n,k;
+    cin>>n>>k;
+
+    map<ll,ll> brandTotal;
+
+    for(ll i=0; i<k; i++){
+        ll b,c;
+        cin>>b>>c;
+
+        brandTotal[b]+=c;
+    }
+
+    vector<ll> v;
+    for(auto it:brandTotal){
+        v.pb(it.second);
+    }
+
+    sort(v.begin(),v.end());
+
+    ll totalCost=0;
+    ll i=v.size()-1;
+    while(n-- && i>=0){
+        totalCost+=v[i];
+        i--;
+    }
+
+    cout<<totalCost<<endl;
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

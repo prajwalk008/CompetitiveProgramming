@@ -38,10 +38,50 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll n,m;
+    cin>>n>>m;
+
+    vector<vector<ll>> arr(n,vector<ll>(m));
+
+    for(ll i=0; i<n; i++){
+        for(ll j=0; j<m; j++){
+            cin>>arr[i][j];
+        }
+    }
+
+    vll perm(n);
+
+    for(ll i=0; i<n; i++){
+        //bool isGood=true;
+        ll setRem=-1;
+        for(ll j=0; j<m; j++){
+            if(j==0){
+                setRem=(arr[i][j])%n;
+            }
+            else{
+                if(setRem!=arr[i][j]%n){
+                    cout<<-1<<endl;
+                    return;
+                }
+            }
+        }
+        ll idx= setRem;
+        perm[idx]=i+1;
+    }
+
+    for(ll i=0; i<n; i++){
+        cout<<perm[i]<<" ";
+    }
+    cout<<endl;
+
+
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

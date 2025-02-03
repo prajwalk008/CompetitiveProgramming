@@ -38,10 +38,85 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+vector<ll> maxSlidingWindow(vector<ll>& nums, int k) {
+    deque<ll> dq;  // Stores indices of useful elements
+    vector<ll> result;
+
+    for (int i = 0; i < nums.size(); i++) {
+        
+        if (!dq.empty() && dq.front() == i - k) {
+            dq.pop_front();
+        }
+
+        
+        while (!dq.empty() && nums[dq.back()] < nums[i]) {
+            dq.pop_back();
+        }
+
+        
+        dq.push_back(i);
+
+        
+        if (i >= k - 1) {
+            result.push_back(nums[dq.front()]);
+        }
+    }
+
+    return result;
+}
+
+void solvekr(){
+    ll n,d,k;
+    cin>>n>>d>>k;
+
+    vll arr(n,0);
+
+    while(k--){
+        ll l,r;
+        cin>>l>>r;
+
+        l--;
+        r--;
+
+        arr[l]+=1;
+        if(r<n-1){
+            arr[r+1]-=1;
+        }
+    }
+
+    ll maxEleIdx=0;
+    for(ll i=1; i<n; i++){
+        arr[i]+=arr[i-1];
+        if(i<=n-d && arr[i]>arr[maxEleIdx]){
+            maxEleIdx=i;
+        }
+    }
+
+    ll broVisit=maxEleIdx;
+
+    vll momVisit=maxSlidingWindow(arr,d);
+
+    ll momVisitsOn=0;
+
+    for(ll i=0; i<n-d; i++){
+        if(momVisit[i]<momVisit[momVisitsOn]){
+            momVisitsOn=i;
+        }
+    }
+
+    cout<<broVisit+1<<" "<<momVisitsOn+1<<endl;
+
+
+
+
+
+
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

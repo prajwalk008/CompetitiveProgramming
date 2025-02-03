@@ -38,10 +38,47 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll n,a,b;
+
+    cin>>n>>a>>b;
+    string s;
+    cin>>s;
+
+    ll x=0,y=0;
+
+    ll j=0;
+    while((x<=11 || y<=11) && j<10000){
+        char t= s[j%n];
+        //cout<<"x="<<x<<' '<<"y="<<y<<endl;
+        if(x==a && y==b){
+            yes();
+            return;
+        }
+        else{
+            if(t=='N'){
+                y+=1;
+            }
+            else if(t=='S'){
+                y-=1;
+            }
+            else if(t=='E'){
+                x+=1;
+            }
+            else if(t=='W'){
+                x-=1;
+            }
+        }
+        j++;
+    }
+    no();
+    
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+       solvekr(); 
     }
 }

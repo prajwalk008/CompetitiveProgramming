@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -38,10 +38,72 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
-int main(){
-    int t;
-    cin>>t;
-    while(t--){
-        
+void solvekr(){
+    ll n,q;
+    cin>>n>>q;
+
+    vvi matrix(n,vi(n));
+
+    for(ll i=0; i<n; i++){
+        for(ll j=0; j<n; j++){
+            char t;
+            cin>>t;
+            if(t=='.'){
+                matrix[i][j]=0;
+            }
+            else{
+                matrix[i][j]=1;
+            }
+        }
     }
+    
+
+    vvi preMat(n,vi(n));
+
+    for(ll i=0; i<n; i++){
+        for(ll j=0; j<n; j++){
+            preMat[i][j]=matrix[i][j];
+            if(i>0){
+                preMat[i][j]+=preMat[i-1][j];
+            }
+            if(j>0){
+                preMat[i][j]+=preMat[i][j-1];
+            }
+            if(i>0 && j>0){
+                preMat[i][j]-=preMat[i-1][j-1];
+            }
+        }
+    }
+    
+
+    while(q--){
+        //cout<<"00"<<endl;
+        ll y1,x1,y2,x2;
+        cin>>y1>>x1>>y2>>x2;
+        //cout<<x2<<" "<<y2<<endl;
+        x1--;
+        x2--;
+        y1--;
+        y2--;
+
+        ll trees= preMat[y2][x2];
+        //cout<<"trees="<<trees<<endl;
+        if(x1>0){
+            trees-=preMat[y2][x1-1];
+        }
+        if(y1>0){
+            trees-=preMat[y1-1][x2];
+        }
+        if(x1>0 && y1>0){
+            trees+=preMat[y1-1][x1-1];
+        }
+
+        cout<<trees<<endl;
+
+
+    }
+}
+
+int main(){
+    solvekr();
 }

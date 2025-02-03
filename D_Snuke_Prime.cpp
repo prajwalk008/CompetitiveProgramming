@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -38,10 +38,58 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
-int main(){
-    int t;
-    cin>>t;
-    while(t--){
-        
+void solvekr(){
+    ll n,C;
+    cin>>n>>C;
+
+    ll ncpy=n;
+
+    set<ll> set1;
+    map<ll,ll> corresValue;
+
+    while(ncpy--){
+        ll a,b,c;
+        cin>>a>>b>>c;
+
+        set1.insert(a);
+        corresValue[a]+=c;
+
+        set1.insert(b+1);
+        corresValue[b+1]-=c;
+
     }
+    // for(auto it: set1){
+    //     cout<<it<<" ";
+    // }
+    // cout<<endl;
+
+    ll lastVal=0;
+    map<ll,ll> finalVal;
+    for (auto it = set1.begin(); it != set1.end(); ++it) {
+        finalVal[*it]=lastVal+corresValue[*it];
+        lastVal=finalVal[*it];
+    }
+    
+    //cout<<endl;
+
+    ll ans=0;
+    for (auto it = set1.begin(); it != set1.end(); ++it) {
+        auto nextIt = next(it);
+        if (nextIt != set1.end()) {
+            if(finalVal[*it]>C){
+                ans+=((*nextIt)-(*it))*C;
+            }
+            else{
+                ans+= ((*nextIt)-(*it))*finalVal[*it];
+            }
+            
+           
+        }
+    }
+
+    cout<<ans<<endl;
+}
+
+int main(){
+    solvekr();
 }

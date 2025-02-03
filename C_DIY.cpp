@@ -38,10 +38,77 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll n;
+    cin>>n;
+
+    vll arr(n);
+    inv;
+
+    sort(arr.begin(),arr.end());
+
+    ll xl=INT_MAX;
+    ll xh=INT_MIN,yl=INT_MAX,yh=INT_MIN;
+
+    for(ll i=0; i<n-1; i++){
+        if(arr[i]==arr[i+1]){
+            if(xl==INT_MAX){
+                xl=arr[i];
+
+            }
+            else if(yl==INT_MAX){
+                yl=arr[i];
+            }
+            else if(yh==INT_MIN){
+                yh=arr[i];
+            }
+            else if(arr[i]>=yh){
+                xh=yh;
+                yh=arr[i];
+            }
+            i+=1;
+        }
+    }
+
+    //cout<<xl<<" "<<yh<<" "<<xl<<" "<<yl<<" "<<xh<<" "<<yl<<" "<<xh<<" "<<yh<<" "<<endl;
+
+    if(xl==INT_MAX || xh==INT_MIN || yl==INT_MAX || yh==INT_MIN){
+        no();
+        return;
+    }
+    else{
+        ll a1= (xh-xl)*(yh-yl);
+        swap(xh,yh);
+        ll a2= (xh-xl)*(yh-yl);
+        swap(xh,yh);
+        swap(xh,yl);
+        ll a3= (xh-xl)*(yh-yl);
+        swap(xh,yl);
+
+        if(a1>=a2 && a1>=a3){
+            yes();
+            cout<<xl<<" "<<yh<<" "<<xl<<" "<<yl<<" "<<xh<<" "<<yl<<" "<<xh<<" "<<yh<<" "<<endl;
+        }
+        else if(a2>=a1 && a2>=a3){
+            yes();
+            swap(xh,yh);
+            cout<<xl<<" "<<yh<<" "<<xl<<" "<<yl<<" "<<xh<<" "<<yl<<" "<<xh<<" "<<yh<<" "<<endl;
+        }
+        else if(a3>=a1 && a3>=a2){
+            yes();
+            swap(xh,yl);
+            cout<<xl<<" "<<yh<<" "<<xl<<" "<<yl<<" "<<xh<<" "<<yl<<" "<<xh<<" "<<yh<<" "<<endl;
+
+
+        }
+
+    }
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }
