@@ -38,38 +38,86 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+ll fun(vector<ll>& brr, ll minBound, ll currVal){
+    ll s=0; 
+    ll e=brr.size()-1;
+    ll mid= s+(e-s)/2;
+
+    ll ans=-1;
+
+    while(s<=e){
+        if(brr[mid]-currVal>=minBound){
+            ans=mid;
+            e=mid-1;
+        }
+        else{
+            s=mid+1;
+        }
+        mid= s+(e-s)/2;
+    }
+
+    return ans;
+}
+
 void solvekr(){
-    ll n;
-    cin>>n;
+    ll n,m;
+    cin>>n>>m;
 
     vll arr(n);
     inv;
-    
-    ll mod= arr[0]%2;
-    for(ll i=1; i<n; i++){
-        if(arr[i]%2!=mod){
-            cout<<-1<<endl;
-            return;
-        }
+
+    vll brr(m);
+    for(auto &it:brr){
+        cin>>it;
     }
+    sort(brr.begin(),brr.end());
 
-    sort(arr.begin(),arr.end());
+    for(ll i=0; i<n; i++){  
+        if(i==0){
+            ll x= fun(brr,INT64_MIN, arr[i]);
+            if(x!=-1){
+                ll z= brr[x]-arr[i];
+                arr[i]=min(arr[i],z);
+            }
+            
+        }   
+        else{
+            ll x= fun(brr,arr[i-1],arr[i]);
+            ll y= arr[i];
 
-    vll ans;
-    while((arr[n-1]/2.0)!=0){
+            if(x!=-1){
+                ll z= brr[x]-y;
+                if(max(z,y)<arr[i-1]){
+                    no();
+                    return;
+                }
+                else if(min(z,y)>=arr[i-1]){
+                    arr[i]=min(z,y);
+                }
+                else if(z<=y){
+                    arr[i]=y;
+                }
+                else if(y<z){
+                    arr[i]=z;
+                }
+            }
+            else{
+                if(arr[i]<arr[i-1]){
+                    no();
+                    return;
+                }
+            }
+
+            
+        }   
         
-        ans.pb(ceil(arr[n-1]/2.0));
-        arr[n-1]=(arr[n-1]/2.0);
     }
+    //print_v(arr);
 
-    cout<<ans.size()<<endl;
-    for(ll i=0; i<ans.size(); i++){
-        cout<<ans[i]<<" ";
-    }
-    cout<<endl;
+    yes();
     
 
-
+     
 }
 
 int main(){

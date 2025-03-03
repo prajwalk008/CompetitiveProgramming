@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -39,45 +39,42 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,k;
-    cin>>n>>k;
+    ll n,m;
+    cin>>n>>m;
 
     vll arr(n);
     inv;
 
-    map<ll,ll> freq;
+    sort(arr.begin(),arr.end());
+    ll maxi= arr[n-1];
 
-    for(ll i=0; i<n; i++){
-        freq[arr[i]]++;
-    }
+    while(m--){
+        char op;
+        ll l,r;
+        cin>>op>>l>>r;
 
-    vector<ll> test;
-    for(auto it:freq){
-        test.pb(it.second);
-    }
-
-    sort(test.begin(),test.end());
-
-    //cout<<"here"<<endl;
-
-    ll i=0;
-    ll dusted=0;
-    while(k>0 && i<test.size()){
-        if(k>=test[i]){
-            k-=test[i];
-            dusted++;
+        if(op=='+'){
+            if(l<=maxi && r>=maxi){
+                maxi+=1;
+            }
+    
+            cout<<maxi<<" ";
         }
         else{
-            break;
+            if(l<=maxi && r>=maxi){
+                maxi-=1;
+            }
+    
+            cout<<maxi<<" ";
         }
-        i++;
+
+        
+
+        
     }
 
-    cout<<max(1,test.size()-dusted)<<endl;
-
-    
+    cout<<endl; 
 }
-
 
 int main(){
     int t;

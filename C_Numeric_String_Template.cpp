@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -38,46 +38,71 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
-void solvekr(){
-    ll n,k;
-    cin>>n>>k;
+void doIt(string& s, vector<ll>& arr, set<ll>& s1){
+    ll n=arr.size();
 
-    vll arr(n);
-    inv;
+    if(s1.size()>26){
+        no();
+        return;
+    }
 
-    map<ll,ll> freq;
+    if(s.length()!=arr.size()){
+        no();
+        return;
+    }
+
+    map<ll,char> corres;
+    map<char,ll> charInt;
 
     for(ll i=0; i<n; i++){
-        freq[arr[i]]++;
-    }
-
-    vector<ll> test;
-    for(auto it:freq){
-        test.pb(it.second);
-    }
-
-    sort(test.begin(),test.end());
-
-    //cout<<"here"<<endl;
-
-    ll i=0;
-    ll dusted=0;
-    while(k>0 && i<test.size()){
-        if(k>=test[i]){
-            k-=test[i];
-            dusted++;
+        if(corres.find(arr[i])==corres.end() && charInt.find(s[i])==charInt.end()){
+            corres[arr[i]]=s[i];
+            charInt[s[i]]=arr[i];
+        }
+        else if(corres.find(arr[i])!=corres.end() && charInt.find(s[i])==charInt.end()){
+            no();
+            return;
+        }
+        else if(corres.find(arr[i])==corres.end() && charInt.find(s[i])!=charInt.end()){
+            no();
+            return;
         }
         else{
-            break;
+            if(corres[arr[i]]!=s[i] || charInt[s[i]]!=arr[i]){
+                no();
+                return;
+            }
         }
-        i++;
     }
 
-    cout<<max(1,test.size()-dusted)<<endl;
-
-    
+    yes();
 }
 
+void solvekr(){
+    ll n;
+    cin>>n;
+
+    set<ll> s1;
+    vll arr(n);
+    for(ll i=0; i<n; i++){
+        cin>>arr[i];
+        s1.insert(arr[i]);
+    }
+
+
+    ll m;
+    cin>>m;
+
+    while(m--){
+        string s;
+        cin>>s;
+
+        doIt(s,arr,s1);
+
+    }
+
+
+}
 
 int main(){
     int t;

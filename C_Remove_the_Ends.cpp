@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -39,45 +39,55 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,k;
-    cin>>n>>k;
+    ll n;
+    cin>>n;
 
     vll arr(n);
     inv;
 
-    map<ll,ll> freq;
+    ll coins=0;
+    ll negSum=0;
+    ll posSum=0;
 
     for(ll i=0; i<n; i++){
-        freq[arr[i]]++;
+        if(arr[i]<0){
+            negSum+=-1LL*arr[i];
+        }
     }
 
-    vector<ll> test;
-    for(auto it:freq){
-        test.pb(it.second);
-    }
+    coins=max(coins,negSum+posSum);
 
-    sort(test.begin(),test.end());
+    for(ll i=0; i<n; i++){
+        if(i<n-1){
+            if(arr[i]<0){
+                negSum+=arr[i];
+            }
+            else{
+                posSum+=arr[i];
+            }
 
-    //cout<<"here"<<endl;
-
-    ll i=0;
-    ll dusted=0;
-    while(k>0 && i<test.size()){
-        if(k>=test[i]){
-            k-=test[i];
-            dusted++;
+            if(arr[i]>0 && arr[i+1]<0){
+                coins=max(coins,negSum+posSum);
+            }
         }
         else{
-            break;
+            if(arr[i]<0){
+                negSum+=arr[i];
+            }
+            else{
+                posSum+=arr[i];
+            }
+
+            if(arr[i]>0){
+                coins=max(coins,negSum+posSum);
+            }
+
+
         }
-        i++;
     }
 
-    cout<<max(1,test.size()-dusted)<<endl;
-
-    
+    cout<<coins<<endl;
 }
-
 
 int main(){
     int t;

@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -39,45 +39,62 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,k;
-    cin>>n>>k;
+    ll n,m;
+    cin>>n>>m;
 
-    vll arr(n);
-    inv;
-
-    map<ll,ll> freq;
+    vector<vector<ll>> mat(n,vector<ll>(m));
 
     for(ll i=0; i<n; i++){
-        freq[arr[i]]++;
-    }
-
-    vector<ll> test;
-    for(auto it:freq){
-        test.pb(it.second);
-    }
-
-    sort(test.begin(),test.end());
-
-    //cout<<"here"<<endl;
-
-    ll i=0;
-    ll dusted=0;
-    while(k>0 && i<test.size()){
-        if(k>=test[i]){
-            k-=test[i];
-            dusted++;
+        for(ll j=0; j<m; j++){
+            cin>>mat[i][j];
         }
-        else{
-            break;
-        }
-        i++;
     }
 
-    cout<<max(1,test.size()-dusted)<<endl;
+    map<ll,ll> adcScore;
+    ll maxAdj=-1;
+    ll maxAdjScore=0;
 
-    
+    for(ll i=0; i<n; i++){
+        for(ll j=0; j<m; j++){
+            if(i<n-1 && mat[i][j]==mat[i+1][j]){
+                adcScore[mat[i][j]]=1;
+                if(maxAdjScore==0){
+                    maxAdjScore=1;
+                    maxAdj=mat[i][j];
+                }
+            }
+            else if(j<m-1 && mat[i][j]==mat[i][j+1]){
+                adcScore[mat[i][j]]=1;
+                if(maxAdjScore==0){
+                    maxAdjScore=1;
+                    maxAdj=mat[i][j];
+                }
+            }
+            else{
+                adcScore[mat[i][j]]=max(0,adcScore[mat[i][j]]);
+            }
+        }
+    }
+
+    if(maxAdj==-1){
+        cout<<adcScore.size()-1<<endl;
+    }
+    else{
+        ll ct=0;
+        for(auto it:adcScore){
+            if(it.first!=maxAdj){
+                if(it.second==1){
+                    ct+=2;
+                }
+                else{
+                    ct+=1;
+                }
+            }
+        }
+
+        cout<<ct<<endl;
+    }
 }
-
 
 int main(){
     int t;

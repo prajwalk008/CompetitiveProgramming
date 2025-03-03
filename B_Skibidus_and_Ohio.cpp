@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -39,45 +39,18 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,k;
-    cin>>n>>k;
+    string s;
+    cin>>s;
 
-    vll arr(n);
-    inv;
-
-    map<ll,ll> freq;
-
-    for(ll i=0; i<n; i++){
-        freq[arr[i]]++;
-    }
-
-    vector<ll> test;
-    for(auto it:freq){
-        test.pb(it.second);
-    }
-
-    sort(test.begin(),test.end());
-
-    //cout<<"here"<<endl;
-
-    ll i=0;
-    ll dusted=0;
-    while(k>0 && i<test.size()){
-        if(k>=test[i]){
-            k-=test[i];
-            dusted++;
+    for(ll i=0; i<s.length(); i++){
+        if(s[i]==s[i+1]){
+            cout<<1<<endl;
+            return;
         }
-        else{
-            break;
-        }
-        i++;
     }
 
-    cout<<max(1,test.size()-dusted)<<endl;
-
-    
+    cout<<s.length()<<endl;
 }
-
 
 int main(){
     int t;

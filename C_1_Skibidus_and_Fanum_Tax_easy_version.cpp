@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -39,45 +39,26 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,k;
-    cin>>n>>k;
+    ll n,m;
+    cin>>n>>m;
 
     vll arr(n);
     inv;
 
-    map<ll,ll> freq;
-
-    for(ll i=0; i<n; i++){
-        freq[arr[i]]++;
+    vll brr(m);
+    for(auto &it:brr){
+        cin>>it;
     }
 
-    vector<ll> test;
-    for(auto it:freq){
-        test.pb(it.second);
-    }
+    for(ll i=0; i<n-1; i++){
+        if(arr[i]>arr[i+1]){
+            ll x= arr[i];
+            x= brr[0]-x;
 
-    sort(test.begin(),test.end());
-
-    //cout<<"here"<<endl;
-
-    ll i=0;
-    ll dusted=0;
-    while(k>0 && i<test.size()){
-        if(k>=test[i]){
-            k-=test[i];
-            dusted++;
+            if()
         }
-        else{
-            break;
-        }
-        i++;
     }
-
-    cout<<max(1,test.size()-dusted)<<endl;
-
-    
 }
-
 
 int main(){
     int t;

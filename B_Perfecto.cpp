@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -39,45 +39,68 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,k;
-    cin>>n>>k;
+    ll n;
+    cin>>n;
 
-    vll arr(n);
-    inv;
+    if(n==1 || n==8 || n==49 || n==288 || n==1681 || n==9800 || n==57121 || n==332928){
+        cout<<-1<<endl;
+        return;
+    }
 
-    map<ll,ll> freq;
+    vll ans;
+    for(ll i=0; i<n; i++){
+        if(i==0){
+            ans.pb(2);
+            ans.push_back(1);
+            i++;
+        }
+        else if(i==7){
+            ans.pb(9);
+            ans.pb(8);
+            i++;
+        }
+        else if(i==48){
+            ans.pb(50);
+            ans.pb(49);
+            i++;
+        }
+        else if(i==287){
+            ans.pb(289);
+            ans.pb(288);
+            i++;
+        }
+        else if(i==1680){
+            ans.pb(1682);
+            ans.pb(1681);
+            i++;
+        }
+        else if(i==9799){
+            ans.pb(9801);
+            ans.pb(9800);
+            i++;
+        }
+        else if(i==57120){
+            ans.pb(57122);
+            ans.pb(57121);
+            i++;
+        }
+        else if(i==332927){
+            ans.pb(332929);
+            ans.pb(332928);
+            i++;
+        }
+        
+        
+        else{
+            ans.push_back(i+1);
+        }
+    }
 
     for(ll i=0; i<n; i++){
-        freq[arr[i]]++;
+        cout<<ans[i]<<" ";
     }
-
-    vector<ll> test;
-    for(auto it:freq){
-        test.pb(it.second);
-    }
-
-    sort(test.begin(),test.end());
-
-    //cout<<"here"<<endl;
-
-    ll i=0;
-    ll dusted=0;
-    while(k>0 && i<test.size()){
-        if(k>=test[i]){
-            k-=test[i];
-            dusted++;
-        }
-        else{
-            break;
-        }
-        i++;
-    }
-
-    cout<<max(1,test.size()-dusted)<<endl;
-
-    
+    cout<<endl;
 }
-
 
 int main(){
     int t;

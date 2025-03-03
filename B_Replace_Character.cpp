@@ -38,10 +38,67 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll n;
+    cin>>n;
+
+    string s;
+    cin>>s;
+
+    if(n==1){
+        cout<<s<<endl;
+        return;
+    }
+
+    bool allSame=true;
+    for(auto i:s){
+        if(i!=s[0]){
+            allSame=0;
+        }
+    }
+
+    if(allSame){
+        cout<<s<<endl;
+        return;
+    }
+
+    map<char,ll> freq;
+    for(auto i:s){
+        freq[i]++;
+    }
+
+    char maxFreq='1',minFreq='1';
+
+    for(auto it:freq){
+        if(it.second>freq[maxFreq]){
+            maxFreq=it.first;
+        }
+    }
+
+    for(auto it:freq){
+        if(minFreq=='1' && it.first!=maxFreq){
+            minFreq=it.first;
+        }
+        if(it.second<freq[minFreq]){
+            minFreq=it.first;
+        }
+    }
+
+    for(ll i=0; i<n; i++){
+        if(s[i]==minFreq){
+            s[i]=maxFreq;
+            cout<<s<<endl;
+            return;
+        }
+    }
+
+
+}
+
 int main(){
     int t;
     cin>>t;
     while(t--){
-        
+        solvekr();
     }
 }

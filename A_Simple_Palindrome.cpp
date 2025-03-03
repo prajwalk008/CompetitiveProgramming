@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -39,45 +39,79 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,k;
-    cin>>n>>k;
+    ll n;
+    cin>>n;
 
-    vll arr(n);
-    inv;
+    ll quo= n/5;
+    ll rem= n%5;
 
-    map<ll,ll> freq;
+    string sol;
 
-    for(ll i=0; i<n; i++){
-        freq[arr[i]]++;
+    if(rem==0){
+        string s1(quo,'a');
+        sol+=s1;
+        string s2(quo,'e');
+        sol+=s2;
+        string s3(quo,'i');
+        sol+=s3;
+        string s4(quo,'o');
+        sol+=s4;
+        string s5(quo,'u');
+        sol+=s5;
+    }
+    else if(rem==1){
+        string s1(quo+1,'a');
+        sol+=s1;
+        string s2(quo,'e');
+        sol+=s2;
+        string s3(quo,'i');
+        sol+=s3;
+        string s4(quo,'o');
+        sol+=s4;
+        string s5(quo,'u');
+        sol+=s5;
+    }
+    else if(rem==2){
+        string s1(quo+1,'a');
+        sol+=s1;
+        string s2(quo+1,'e');
+        sol+=s2;
+        string s3(quo,'i');
+        sol+=s3;
+        string s4(quo,'o');
+        sol+=s4;
+        string s5(quo,'u');
+        sol+=s5;
+    }
+    else if(rem==3){
+        string s1(quo+1,'a');
+        sol+=s1;
+        string s2(quo+1,'e');
+        sol+=s2;
+        string s3(quo+1,'i');
+        sol+=s3;
+        string s4(quo,'o');
+        sol+=s4;
+        string s5(quo,'u');
+        sol+=s5;
+    }
+    else if(rem==4){
+        string s1(quo+1,'a');
+        sol+=s1;
+        string s2(quo+1,'e');
+        sol+=s2;
+        string s3(quo+1,'i');
+        sol+=s3;
+        string s4(quo+1,'o');
+        sol+=s4;
+        string s5(quo,'u');
+        sol+=s5;
     }
 
-    vector<ll> test;
-    for(auto it:freq){
-        test.pb(it.second);
-    }
-
-    sort(test.begin(),test.end());
-
-    //cout<<"here"<<endl;
-
-    ll i=0;
-    ll dusted=0;
-    while(k>0 && i<test.size()){
-        if(k>=test[i]){
-            k-=test[i];
-            dusted++;
-        }
-        else{
-            break;
-        }
-        i++;
-    }
-
-    cout<<max(1,test.size()-dusted)<<endl;
+    cout<<sol<<endl;
 
     
 }
-
 
 int main(){
     int t;

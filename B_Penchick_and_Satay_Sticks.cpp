@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -39,45 +39,36 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,k;
-    cin>>n>>k;
+    ll n;
+    cin>>n;
 
     vll arr(n);
     inv;
 
-    map<ll,ll> freq;
-
     for(ll i=0; i<n; i++){
-        freq[arr[i]]++;
-    }
-
-    vector<ll> test;
-    for(auto it:freq){
-        test.pb(it.second);
-    }
-
-    sort(test.begin(),test.end());
-
-    //cout<<"here"<<endl;
-
-    ll i=0;
-    ll dusted=0;
-    while(k>0 && i<test.size()){
-        if(k>=test[i]){
-            k-=test[i];
-            dusted++;
+        //cout<<i<<endl;
+        if(i==0){
+            if(arr[i]!=1 && arr[i]!=2){
+                no();
+                return;
+            }
+        }
+        else if(i==n-1){
+            if(arr[i]!=n && arr[i]!=n-1){
+                no();
+                return;
+            }
         }
         else{
-            break;
+            if(arr[i]!=i && arr[i]!=i+1 && arr[i]!=i+2){
+                no();
+                return;
+            }
         }
-        i++;
+ 
     }
-
-    cout<<max(1,test.size()-dusted)<<endl;
-
-    
+    yes();
 }
-
 
 int main(){
     int t;

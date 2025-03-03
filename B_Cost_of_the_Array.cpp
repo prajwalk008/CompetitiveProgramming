@@ -23,11 +23,11 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
-ll min(int a,ll b) { if (a<b) return a; return b; }
+ll min(ll a,ll b) { if (a<b) return a; return b; }
 ll max(ll a,int b) { if (a>b) return a; return b; }
 ll max(int a,ll b) { if (a>b) return a; return b; }
 ll gcd(ll a,ll b) { if (b==0) return a; return gcd(b, a%b); }
@@ -38,6 +38,16 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+ll cost(vector<ll>& v){
+    ll i=0;
+    for(; i<v.size(); i++){
+        if(v[i]!=i+1){
+            return i+1;
+        }
+    }
+    return i+1;
+}
+
 void solvekr(){
     ll n,k;
     cin>>n>>k;
@@ -45,39 +55,25 @@ void solvekr(){
     vll arr(n);
     inv;
 
-    map<ll,ll> freq;
-
-    for(ll i=0; i<n; i++){
-        freq[arr[i]]++;
-    }
-
-    vector<ll> test;
-    for(auto it:freq){
-        test.pb(it.second);
-    }
-
-    sort(test.begin(),test.end());
-
-    //cout<<"here"<<endl;
-
-    ll i=0;
-    ll dusted=0;
-    while(k>0 && i<test.size()){
-        if(k>=test[i]){
-            k-=test[i];
-            dusted++;
+    if(n==k){
+        vll brr;
+        for(ll i=1; i<n; i+=2){
+            brr.push_back(arr[i]);
         }
-        else{
-            break;
-        }
-        i++;
+        cout<<cost(brr)<<endl;
+        return;
     }
 
-    cout<<max(1,test.size()-dusted)<<endl;
+    for(ll i=1; i<n-k+2; i++){
+        if(arr[i]!=1){
+            cout<<1<<endl;
+            return;
+        }
+    }
 
-    
+    cout<<2<<endl;
+
 }
-
 
 int main(){
     int t;
