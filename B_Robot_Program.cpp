@@ -39,44 +39,59 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,m;
-    cin>>n>>m;
+    ll n,x,k;
+    cin>>n>>x>>k;
 
-    vll arr(n);
-    inv;
+    string s;
+    cin>>s;
 
-    vll brr(m);
-    for(auto &it:brr){
-        cin>>it;
-    }
+    ll firstZero=-1,secondZero=-1;
+    ll currPos=x;
+    ll strPtr=0;
+    ll time=1;
 
-    for(ll i=0; i<n; i++){
-        ll am= brr[0]-arr[i];
-        
-        ll mini= min(arr[i],am);
-        ll maxi= max(arr[i],am);
-
-        if(i==0){
-            arr[i]=mini;
+    while(strPtr<n && time<=k){
+        if(s[strPtr]=='L'){
+            currPos--;
         }
         else{
-            if(mini>=arr[i-1]){
-                arr[i]=mini;
-            }
-            else{
-                arr[i]=maxi;
-            }
+            currPos++;
         }
+
+        if(currPos==0 && firstZero==-1){
+            firstZero=time;
+            strPtr=0;
+        }
+        else if(currPos==0 && secondZero==-1){
+            secondZero=time;
+            strPtr=0;
+
+            ll td= secondZero-firstZero;
+
+            ll tLeft= k-time;
+
+            ll pos= tLeft/td;
+
+            cout<<pos+2<<endl;
+            return;
+        }
+        else if(currPos!=0){
+            strPtr++;
+        }
+
+        time++;
     }
 
-    if(is_sorted(arr.begin(),arr.end())){
-        yes();
+    if(firstZero==-1){
+        cout<<0<<endl;
+        return;
     }
     else{
-        no();
+        cout<<1<<endl;
+        return;
     }
 
-    
+
 }
 
 int main(){

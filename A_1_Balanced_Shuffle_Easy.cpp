@@ -39,50 +39,44 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,m;
-    cin>>n>>m;
+    string s;
+    cin>>s;
 
-    vll arr(n);
-    inv;
+    vector<ll> pb;
 
-    vll brr(m);
-    for(auto &it:brr){
-        cin>>it;
-    }
-
-    for(ll i=0; i<n; i++){
-        ll am= brr[0]-arr[i];
-        
-        ll mini= min(arr[i],am);
-        ll maxi= max(arr[i],am);
-
-        if(i==0){
-            arr[i]=mini;
+    ll currbal=0;
+    for(ll i=0; i<s.length(); i++){
+        pb.pb(currbal);
+        if(s[i]=='('){
+            currbal++;
         }
         else{
-            if(mini>=arr[i-1]){
-                arr[i]=mini;
-            }
-            else{
-                arr[i]=maxi;
-            }
+            currbal--;
         }
     }
 
-    if(is_sorted(arr.begin(),arr.end())){
-        yes();
-    }
-    else{
-        no();
+    map<ll,priority_queue<ll>> pbToPos;
+    set<ll>prefixes;
+
+    for(ll i=0; i<pb.size(); i++){
+        pbToPos[pb[i]].push(i);
+        prefixes.insert(pb[i]);
     }
 
-    
+    string solStr="";
+
+    for(auto i:prefixes){
+        while(!pbToPos[i].empty()){
+            ll x= pbToPos[i].top();
+            solStr+=s[x];
+            pbToPos[i].pop();
+        }
+    }
+
+    cout<<solStr<<endl;
+
 }
 
 int main(){
-    int t;
-    cin>>t;
-    while(t--){
-        solvekr();
-    }
+    solvekr();
 }

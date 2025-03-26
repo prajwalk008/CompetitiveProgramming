@@ -39,42 +39,76 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,m;
-    cin>>n>>m;
+    ll n;
+    cin>>n;
 
     vll arr(n);
-    inv;
+    map<ll,ll> freq;
+    for(ll i=0; i<n; i++){
+        cin>>arr[i];
 
-    vll brr(m);
-    for(auto &it:brr){
-        cin>>it;
+        freq[arr[i]]++;
     }
+
+    ll initScr= n- freq.size();
+
+    vll freqArr(n);
+    for(ll i=0; i<n; i++){
+        freqArr[i]=freq[arr[i]];
+    }
+
+    ll maxoneslength=0;
+    ll l=-1,r=-1;
+    ll lSto=-1,rSto=-1;
+
 
     for(ll i=0; i<n; i++){
-        ll am= brr[0]-arr[i];
-        
-        ll mini= min(arr[i],am);
-        ll maxi= max(arr[i],am);
-
-        if(i==0){
-            arr[i]=mini;
-        }
-        else{
-            if(mini>=arr[i-1]){
-                arr[i]=mini;
+        if(freqArr[i]==1){
+            if(l==-1){
+                l=i;
+                r=i;
             }
             else{
-                arr[i]=maxi;
+                r++;
+            }
+        }
+        else{
+            if(r!=-1){
+                ll currLength=r-l+1;
+                if(currLength>maxoneslength){
+                    maxoneslength=currLength;
+                    lSto=l;
+                    rSto=r;  
+                }
+                l=-1;
+                r=-1;
             }
         }
     }
+    if(l!=-1 && r!=-1){
+        ll currLength=r-l+1;
+        if(currLength>maxoneslength){
+            maxoneslength=currLength;
+            lSto=l;
+            rSto=r; 
+        }
+        l=-1;
+        r=-1;
+    }
 
-    if(is_sorted(arr.begin(),arr.end())){
-        yes();
+    if(maxoneslength==0){
+        cout<<0<<endl;
+        return;
+    }
+    if(maxoneslength==n){
+        cout<<1<<" "<<n<<endl;
+        return;
     }
     else{
-        no();
+        cout<<lSto+1<<" "<<rSto+1<<endl;
+        return;
     }
+
 
     
 }

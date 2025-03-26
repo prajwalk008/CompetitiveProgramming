@@ -39,44 +39,47 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,m;
-    cin>>n>>m;
+    ll x,y,z,a,b,c;
+    cin>>x>>y>>z>>a>>b>>c;
 
-    vll arr(n);
-    inv;
+    ll happyPep=0;
 
-    vll brr(m);
-    for(auto &it:brr){
-        cin>>it;
-    }
-
-    for(ll i=0; i<n; i++){
-        ll am= brr[0]-arr[i];
-        
-        ll mini= min(arr[i],am);
-        ll maxi= max(arr[i],am);
-
-        if(i==0){
-            arr[i]=mini;
-        }
-        else{
-            if(mini>=arr[i-1]){
-                arr[i]=mini;
-            }
-            else{
-                arr[i]=maxi;
-            }
-        }
-    }
-
-    if(is_sorted(arr.begin(),arr.end())){
-        yes();
+    ll xlLeft=0;
+    if(c<=z){
+        happyPep+=c;
+        xlLeft=z-c;
     }
     else{
-        no();
+        happyPep+=z;
     }
 
+    ll lLeft=0;
+    if(b<=y+xlLeft){
+        happyPep+=b;
+        lLeft=y+xlLeft-b;
+    }
+    else{
+        happyPep+=y+xlLeft;
+        xlLeft=0;
+    }
+
+    if(a<=x+lLeft){
+        happyPep+=a;
+    }
+    else{
+        happyPep+=x+lLeft;
+    }
+
+    cout<<happyPep<<endl;
+
+
     
+
+
+
+
+
+
 }
 
 int main(){

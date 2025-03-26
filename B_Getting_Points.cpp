@@ -38,45 +38,34 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
-void solvekr(){
-    ll n,m;
-    cin>>n>>m;
+ll doIt(ll totDays, ll totalReq, ll lect, ll task){
+    ll s=1;
+    ll e=totDays;
+    ll mid= s+(e-s)/2;
+    ll totTasks=ceil(totDays/7.0);
+    ll ans=totDays;
 
-    vll arr(n);
-    inv;
-
-    vll brr(m);
-    for(auto &it:brr){
-        cin>>it;
-    }
-
-    for(ll i=0; i<n; i++){
-        ll am= brr[0]-arr[i];
-        
-        ll mini= min(arr[i],am);
-        ll maxi= max(arr[i],am);
-
-        if(i==0){
-            arr[i]=mini;
+    while(s<=e){
+        if((mid*(lect)+task*min(mid*2,totTasks))<totalReq){
+            s=mid+1;
         }
         else{
-            if(mini>=arr[i-1]){
-                arr[i]=mini;
-            }
-            else{
-                arr[i]=maxi;
-            }
+            ans=mid;
+            e=mid-1;
         }
+        mid= s+(e-s)/2;
     }
 
-    if(is_sorted(arr.begin(),arr.end())){
-        yes();
-    }
-    else{
-        no();
-    }
+    return ans;
+}
 
-    
+void solvekr(){
+    ll n,p,l,t;
+    cin>>n>>p>>l>>t;
+
+    ll workDays= doIt(n,p,l,t);
+
+    cout<<n-workDays<<endl;
 }
 
 int main(){

@@ -39,44 +39,50 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,m;
-    cin>>n>>m;
+    ll n;
+    cin>>n;
 
-    vll arr(n);
-    inv;
+    string s;
+    cin>>s;
 
-    vll brr(m);
-    for(auto &it:brr){
-        cin>>it;
-    }
+    ll open=0;
+    priority_queue<ll>openPos;
+    ll cost=0;
 
-    for(ll i=0; i<n; i++){
-        ll am= brr[0]-arr[i];
-        
-        ll mini= min(arr[i],am);
-        ll maxi= max(arr[i],am);
-
-        if(i==0){
-            arr[i]=mini;
+    for(ll i=0; i<s.length(); i++){
+        if(s[i]=='('){
+            open++;
+            openPos.push(i);
         }
-        else{
-            if(mini>=arr[i-1]){
-                arr[i]=mini;
+        else if(s[i]=='_'){
+            if(open>0){
+                s[i]=')';
+                open--;
+                ll pq= openPos.top();
+                openPos.pop();
+                ll diff= i-pq;
+                cost+=diff;
             }
             else{
-                arr[i]=maxi;
+                s[i]='(';
+                open++;
+                openPos.push(i);
             }
+        }
+        else if(s[i]==')'){
+            open--;
+            ll pq= openPos.top();
+            openPos.pop();
+            ll diff= i-pq;
+            cost+=diff;
         }
     }
 
-    if(is_sorted(arr.begin(),arr.end())){
-        yes();
-    }
-    else{
-        no();
-    }
+    cout<<cost<<endl;
 
     
+
+
 }
 
 int main(){

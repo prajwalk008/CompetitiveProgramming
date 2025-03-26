@@ -2,5 +2,11 @@
 using namespace std;
 
 int main(){
-    cout<<"Hi";
+    int n=57;
+    cout<<endl;
+
+    for(int i=0; i<64; i++){
+        cout<<(i^37)<<endl;
+    }
+
 }

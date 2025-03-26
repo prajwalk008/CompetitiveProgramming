@@ -39,44 +39,43 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,m;
-    cin>>n>>m;
+    ll n,k;
+    cin>>n>>k;
 
     vll arr(n);
     inv;
 
-    vll brr(m);
-    for(auto &it:brr){
-        cin>>it;
-    }
+    sort(arr.begin(),arr.end());
+
+    reverse(arr.begin(),arr.end());
+
+    ll oddSum=0,evenSum=0;
 
     for(ll i=0; i<n; i++){
-        ll am= brr[0]-arr[i];
-        
-        ll mini= min(arr[i],am);
-        ll maxi= max(arr[i],am);
-
-        if(i==0){
-            arr[i]=mini;
+        if(i%2==0){
+            evenSum+=arr[i];
         }
         else{
-            if(mini>=arr[i-1]){
-                arr[i]=mini;
-            }
-            else{
-                arr[i]=maxi;
-            }
+            oddSum+=arr[i];
         }
     }
 
-    if(is_sorted(arr.begin(),arr.end())){
-        yes();
-    }
-    else{
-        no();
+    ll j=1;
+    while(k>0 && j<n){
+        ll x= arr[j-1]-arr[j];
+        if(k>=x){
+            oddSum+=x;
+            k-=x;
+        }
+        else{
+            oddSum+=k;
+            k=0;
+            break;
+        }
+        j+=2;
     }
 
-    
+    cout<<evenSum-oddSum<<endl;
 }
 
 int main(){

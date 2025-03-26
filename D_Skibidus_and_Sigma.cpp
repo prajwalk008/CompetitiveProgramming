@@ -42,41 +42,51 @@ void solvekr(){
     ll n,m;
     cin>>n>>m;
 
-    vll arr(n);
-    inv;
-
-    vll brr(m);
-    for(auto &it:brr){
-        cin>>it;
-    }
+    vector<vector<ll>> mat(n,vector<ll>(m));
+    vector<pair<ll,ll>> arr;
+    vll score;
 
     for(ll i=0; i<n; i++){
-        ll am= brr[0]-arr[i];
-        
-        ll mini= min(arr[i],am);
-        ll maxi= max(arr[i],am);
-
-        if(i==0){
-            arr[i]=mini;
+        ll sum=0;
+        ll preSumsum=0;
+        for(ll j=0; j<m; j++ ){
+            ll x;
+            cin>>x;
+            sum+=x;
+            mat[i][j]=x;
+            preSumsum+=sum;
         }
-        else{
-            if(mini>=arr[i-1]){
-                arr[i]=mini;
-            }
-            else{
-                arr[i]=maxi;
-            }
-        }
+        arr.pb({sum,i});
     }
 
-    if(is_sorted(arr.begin(),arr.end())){
-        yes();
+    sort(arr.begin(),arr.end());
+    //print_v(arr);
+
+    vll ans;
+
+    for(ll i=arr.size()-1; i>=0; i--){
+        pair<ll,ll> p= arr[i];
+        ll pos= p.second;
+        vll brr= mat[pos];
+        //print_v(brr);
+
+        ans.insert(ans.end(),brr.begin(),brr.end());
+
     }
-    else{
-        no();
+
+    ll sol=0;
+    for(ll i=0; i<ans.size(); i++){
+        sol+=(ans[i]*(ans.size()-i));
     }
+
+    cout<<sol<<endl;
+    
 
     
+
+
+
+
 }
 
 int main(){

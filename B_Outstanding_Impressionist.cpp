@@ -39,42 +39,56 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,m;
-    cin>>n>>m;
+    ll n;
+    cin>>n;
 
-    vll arr(n);
-    inv;
-
-    vll brr(m);
-    for(auto &it:brr){
-        cin>>it;
+    map<ll,ll> isDangerNumber;
+    vector<vector<ll>> matrix(n,vector<ll>(2));
+    for(ll i=0; i<n; i++){
+        cin>>matrix[i][0]>>matrix[i][1];
+        if(matrix[i][0]==matrix[i][1]){
+            isDangerNumber[matrix[i][0]]++;
+        }
     }
 
-    for(ll i=0; i<n; i++){
-        ll am= brr[0]-arr[i];
-        
-        ll mini= min(arr[i],am);
-        ll maxi= max(arr[i],am);
-
-        if(i==0){
-            arr[i]=mini;
+    ll m= (2*n)+1;
+    vll arr(m);
+    ll sum=0;
+    for(ll i=1; i<m; i++){
+        if(isDangerNumber[i]>0){
+            sum++;
+            arr[i]=sum;
         }
         else{
-            if(mini>=arr[i-1]){
-                arr[i]=mini;
+            arr[i]=sum;
+        }
+    }
+
+    string s="";
+    for(ll i=0; i<n; i++){
+        ll l=matrix[i][0];
+        ll r= matrix[i][1];
+
+        if(l==r && isDangerNumber[l]>1){
+            s+='0';
+        }
+        else if(l==r && isDangerNumber[l]==1){
+            s+='1';
+        }
+        else{
+            ll range= r-l+1;
+            ll diff= arr[r]-arr[l-1];
+
+            if(diff>=range){
+                s+='0';
             }
             else{
-                arr[i]=maxi;
+                s+='1';
             }
         }
     }
 
-    if(is_sorted(arr.begin(),arr.end())){
-        yes();
-    }
-    else{
-        no();
-    }
+    cout<<s<<endl;
 
     
 }

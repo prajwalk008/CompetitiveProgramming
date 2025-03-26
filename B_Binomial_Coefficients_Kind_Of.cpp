@@ -38,6 +38,8 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+#define mod 1000000007
+
 ll fxn(){
 
 }
@@ -52,9 +54,36 @@ void solvekr(){
     vll arrk(t);
     for(int i = 0; i < t; ++i) cin >> arrk[i];
 
-    for(ll i=0; i<t; i++){
-        
+    vll ans(1e5+1);
+    ans[0]=1;
+    ans[1e5]=1;
+
+    ll temp=1;
+    for(ll i=1; i<ans.size()-1; i++){
+        ll x=temp<<1;
+
+        if(x>mod){
+            x%=mod;
+        }
+        temp=x;
+
+        ans[i]=x;
     }
+
+    //print_v(ans);
+
+    for(ll i=0; i<t; i++){
+        ll n= arr[i];
+        ll k= arrk[i];
+
+        if(k==0 || k==n){
+            cout<<1<<endl;  
+        }
+        else{
+            cout<<ans[k]<<endl;
+        }
+    }
+
 }
 
 

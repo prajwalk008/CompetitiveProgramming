@@ -18,7 +18,7 @@ using namespace std;
 #define rf(i,e,s) for(long long int i=e-1;i>=s;i--)
 #define pb push_back
 #define eb emplace_back
-#define inv for(int i = 0; i < n; ++i) cin >> arr[i];
+#define inv for(int i = 0; i < n-2; ++i) cin >> arr[i];
 #define FAST_IO ios::sync_with_stdio(false); cin.tie(nullptr);
 
 //v-print
@@ -39,44 +39,19 @@ void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
 void solvekr(){
-    ll n,m;
-    cin>>n>>m;
+    ll n;
+    cin>>n;
 
-    vll arr(n);
+    vll arr(n-2);
     inv;
 
-    vll brr(m);
-    for(auto &it:brr){
-        cin>>it;
-    }
-
-    for(ll i=0; i<n; i++){
-        ll am= brr[0]-arr[i];
-        
-        ll mini= min(arr[i],am);
-        ll maxi= max(arr[i],am);
-
-        if(i==0){
-            arr[i]=mini;
-        }
-        else{
-            if(mini>=arr[i-1]){
-                arr[i]=mini;
-            }
-            else{
-                arr[i]=maxi;
-            }
+    for(ll i=0; i<n-4; i++){
+        if(arr[i]==1 && arr[i+1]==0 && arr[i+2]==1){
+            no();
+            return;
         }
     }
-
-    if(is_sorted(arr.begin(),arr.end())){
-        yes();
-    }
-    else{
-        no();
-    }
-
-    
+    yes();
 }
 
 int main(){

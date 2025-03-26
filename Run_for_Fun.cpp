@@ -38,51 +38,23 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
-void solvekr(){
-    ll n,m;
-    cin>>n>>m;
-
-    vll arr(n);
-    inv;
-
-    vll brr(m);
-    for(auto &it:brr){
-        cin>>it;
-    }
-
-    for(ll i=0; i<n; i++){
-        ll am= brr[0]-arr[i];
-        
-        ll mini= min(arr[i],am);
-        ll maxi= max(arr[i],am);
-
-        if(i==0){
-            arr[i]=mini;
-        }
-        else{
-            if(mini>=arr[i-1]){
-                arr[i]=mini;
-            }
-            else{
-                arr[i]=maxi;
-            }
-        }
-    }
-
-    if(is_sorted(arr.begin(),arr.end())){
-        yes();
-    }
-    else{
-        no();
-    }
-
-    
-}
 
 int main(){
-    int t;
-    cin>>t;
-    while(t--){
-        solvekr();
+    ll x,y;
+    cin>>x>>y;
+
+    if(x==1){
+        cout<<y-1<<endl;
+    }
+    else if(x==y){
+        cout<<0<<endl;
+    }
+    else if(x>y){
+        cout<<0<<endl;
+        
+    }
+    else{
+        cout<<y/x<<endl;
+    
     }
 }

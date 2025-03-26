@@ -23,7 +23,7 @@ using namespace std;
 
 //v-print
 template <class T>
-void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; cout<<endl;}
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "}"; cout<<endl;}
 
 //utils
 ll min(ll a,int b) { if (a<b) return a; return b; }
@@ -38,42 +38,52 @@ bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a
 void yes() { cout<<"YES\n"; }
 void no() { cout<<"NO\n"; }
 
+void solvekr(){
+    ll n;
+    cin>>n;
+
+    ll eveSum=0;
+    ll oddSum=0;
+    vll arr(n);
+    for(ll i=0; i<n; i++){
+        cin>>arr[i];
+        if(i%2==0){
+            eveSum+=arr[i];
+        }
+        else{
+            oddSum+=arr[i];
+        }
+    }
+
+    if(n%2==0){
+        ll odd=n/2;
+        if(eveSum==oddSum && eveSum%odd==0){
+            yes();
+            return;
+        }
+        no();
+        return;
+    }
+    else{
+        ll odd= n/2;
+
+        if((oddSum)/(1.0*odd)==((eveSum)/(1.0*(odd+1)))){
+            yes();
+            return;
+        }
+        no();
+        
+    }
+    
+
+
+    
+}
 
 int main(){
     int t;
     cin>>t;
     while(t--){
-        int n;
-        cin>>n;
-
-        int oddsum=0;
-        int evensum=0;
-        //int sum=0;
-        int oddn=0,even=0;
-        //vll arr(n);
-        for(int i=0; i<n; i++){
-            int x;
-            cin>>x;
-            //sum+=arr[i];
-
-            if(i%2==0){
-                evensum+=x;
-                even++;
-            }
-            else{
-                oddsum+=x;
-                oddn++;
-            }
-        }
-        //cout<<oddsum<<" "<<evensum<<" "<<" "<<oddn<<" "<<even<<endl;
-
-        if(oddsum%oddn!=0 || evensum%even!=0 || oddsum/oddn !=evensum/even){
-            no();
-        }
-        else{
-            yes();
-        }
-
-        
+        solvekr();
     }
-} 
+}
